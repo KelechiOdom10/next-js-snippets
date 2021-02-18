@@ -1,55 +1,43 @@
-import {
-	Box,
-	Heading,
-	Text,
-	Button,
-	Link,
-	Flex,
-	Image,
-} from "@chakra-ui/react";
-import { Link as NextLink } from "next/link";
+import { AddIcon } from "@chakra-ui/icons";
+import { Heading, Button, Flex, Box } from "@chakra-ui/react";
+import { useRouter } from "next/router";
 import React from "react";
+import { useQueryClient } from "react-query";
 
-export default function Welcome(props) {
+export default function Welcome() {
+	const queryClient = useQueryClient();
+	const { username } = queryClient.getQueryData("user");
+	const router = useRouter();
 	return (
-		<Flex mx="auto" mt={4} maxW="85%" align="center">
-			<Box p={5} mx={3} flexGrow={1}>
-				<Heading fontSize={{ base: "2xl", md: "3xl", lg: "4xl" }}>
-					Everyday Code Snippets
-				</Heading>
-				<Text
-					mt={3}
-					fontSize={{ base: "md", md: "md", lg: "lg" }}
-					fontWeight={500}
-				>
-					Please Login to create and browse snippets you use everyday in Web
-					development!
-				</Text>
-				<Link as={NextLink} _hover={{ textDecoration: "none" }} href="/login">
-					<Button
-						colorScheme="teal"
-						size={{ base: "sm", md: "md" }}
-						py=".7rem"
-						px={5}
-						variant="outline"
-						mt={6}
-						rounded="sm"
-						borderWidth={2}
-						fontSize="lg"
-						fontWeight="bold"
-					>
-						Login
-					</Button>
-				</Link>
-			</Box>
-			<Box display={{ base: "none", md: "flex" }}>
-				<Image
-					mx="auto"
-					maxW="70%"
-					src="https://therenegadecoder.com/wp-content/uploads/2020/05/python-dictionary-syntax.png"
-					alt="Snippets Demo Screenshot"
-				/>
-			</Box>
+		<Flex
+			w={{ base: "90%", md: "65%", lg: "60%" }}
+			mx="auto"
+			mt={7}
+			p={2}
+			flexDir="column"
+		>
+			<Heading fontSize={{ base: "2xl", md: "3xl", lg: "4xl" }}>
+				Welcome{" "}
+				<Box as="span" color="teal.400" fontStyle="italic">
+					{" "}
+					{username}
+				</Box>
+			</Heading>
+			<Button
+				leftIcon={<AddIcon />}
+				colorScheme="teal"
+				maxW={{ base: "40%", md: "30%", lg: "25%" }}
+				variant="outline"
+				mt={6}
+				rounded="lg"
+				borderWidth={2}
+				fontSize={{ base: "xs", md: "sm", lg: "md", xl: "lg" }}
+				fontWeight="bold"
+				boxShadow="md"
+				onClick={() => router.push("/create")}
+			>
+				Create Snippet
+			</Button>
 		</Flex>
 	);
 }
