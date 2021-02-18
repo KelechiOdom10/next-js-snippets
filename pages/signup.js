@@ -11,10 +11,12 @@ import {
 import SignupForm from "../components/SignupForm";
 import { ArrowBackIcon } from "@chakra-ui/icons";
 import ThemeToggler from "../components/ThemeToggler";
-import { Link as NextLink } from "next/link";
+import cookie from "cookie";
+import { useRouter } from "next/router";
 
 export default function LoginArea() {
-	const { colorMode, toggleColorMode } = useColorMode();
+	const { colorMode } = useColorMode();
+	const router = useRouter();
 
 	return (
 		<Flex
@@ -23,38 +25,62 @@ export default function LoginArea() {
 			maxWidth={{ base: "80%", md: "70%" }}
 			m="0 auto"
 		>
-			<Flex my={10} align="center" justify="space-between">
-				<Link as={NextLink} href="/" _hover={{ textDecoration: "none" }}>
-					<ButtonGroup
-						size="sm"
-						isAttached
-						variant="outline"
-						colorScheme={colorMode === "dark" ? "teal" : "black"}
+			<Flex my={8} align="center" justify="space-between">
+				<ButtonGroup
+					size="sm"
+					isAttached
+					variant="outline"
+					colorScheme={colorMode === "dark" ? "teal" : "black"}
+					onClick={() => router.back()}
+				>
+					<IconButton
+						fontWeight="bold"
+						aria-label="Add to friends"
+						fontSize={{ base: "xs", md: "sm" }}
+						icon={<ArrowBackIcon />}
+					/>
+					<Button
+						mr="-px"
+						fontWeight="bold"
+						fontSize={{ base: "xs", md: "sm" }}
 					>
-						<IconButton
-							fontWeight="bold"
-							aria-label="Add to friends"
-							icon={<ArrowBackIcon />}
-						/>
-						<Button mr="-px" fontWeight="bold">
-							Back
-						</Button>
-					</ButtonGroup>
-				</Link>
+						Back
+					</Button>
+				</ButtonGroup>
 				<ThemeToggler />
 			</Flex>
 			<Box
 				borderWidth={1}
 				py={3}
-				px={8}
+				px={6}
 				borderRadius={4}
 				h="auto"
 				textAlign="center"
 				boxShadow="lg"
 			>
-				<Heading mt={4}>Sign up for an account</Heading>
+				<Heading mt={4} fontSize={["xl", "2xl", "3xl", "4xl"]}>
+					Sign up for an account
+				</Heading>
 				<SignupForm />
 			</Box>
 		</Flex>
 	);
 }
+
+export const getServerSideProps = async ({ req }) => {
+	const parseCookies = req => {
+		return cookie.parse(req ? req.headers.cookie || "" : document.cookie);
+	};
+
+	const isLoggedIn = parseCookies(req);
+
+	if (isLoggedIn.auth) {
+		return {
+			redirect: {
+				destination: "/home",
+				permanent: false,
+			},
+		};
+	}
+	return { props: {} };
+};
