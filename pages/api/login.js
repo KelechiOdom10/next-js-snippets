@@ -5,41 +5,59 @@ import cookie from "cookie";
 import { handler } from "../../handlers";
 
 export default handler.post(async (req, res) => {
-  const { email, password } = req.body;
-  try {
-    const user = await db.query("SELECT * FROM users WHERE email = $1", [
-      email,
-    ]);
-    const isValidPassword = bcrypt.compare(password, user[0].hashed_password);
+	const { email, password } = req.body;
+	try {
+		const user = await db.query("SELECT * FROM users WHERE email = $1", [
+			email,
+		]);
 
-    if (user.length === 0 || !isValidPassword) {
-      res.status(401);
-      res.json({
-        status: "error",
-        message: "Invalid Credentials",
-      });
-    }
+		if (user.length === 0) {
+			res.status(403);
+			res.json({
+				status: "error",
+				message: "User does not exist, please sign up!",
+			});
+			return;
+		}
 
-    const jwtToken = jwtGenerator(user[0].id, user[0].username);
+		const isValidPassword = await bcrypt.compare(
+			password,
+			user[0].hashed_password
+		);
 
-    res.setHeader(
-      "Set-Cookie",
-      cookie.serialize("auth", jwtToken, {
-        httpOnly: true,
-        secure: process.env.NODE_ENV !== "development",
-        sameSite: "strict",
-        maxAge: 3600,
-        path: "/",
-      })
-    );
+		if (!isValidPassword) {
+			res.status(401);
+			res.json({
+				status: "error",
+				message: "Invalid Credentials",
+			});
+			return;
+		}
+		const { id, username } = user[0];
 
-    res.status(201);
-    res.json({
-      status: "success",
-      token: jwtToken,
-    });
-  } catch (error) {
-    res.status(400);
-    throw new Error(error);
-  }
+		const jwtToken = jwtGenerator(user[0].id, user[0].username);
+		const stringObj = JSON.stringify({ id, username });
+
+		const token = `${jwtToken};${stringObj}`;
+
+		res.setHeader(
+			"Set-Cookie",
+			cookie.serialize("auth", token, {
+				httpOnly: true,
+				secure: process.env.NODE_ENV !== "development",
+				sameSite: "strict",
+				maxAge: 3600,
+				path: "/",
+			})
+		);
+
+		res.status(201);
+		res.json({
+			status: "success",
+			token: jwtToken,
+		});
+	} catch (error) {
+		res.status(400);
+		throw new Error(error);
+	}
 });
