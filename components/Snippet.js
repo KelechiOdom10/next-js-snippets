@@ -9,8 +9,18 @@ import {
 	Stack,
 	IconButton,
 	Tag,
+	useColorModeValue,
+	useToast,
+	AlertDialog,
+	AlertDialogOverlay,
+	AlertDialogContent,
+	AlertDialogHeader,
+	AlertDialogFooter,
+	AlertDialogBody,
 } from "@chakra-ui/react";
+import { useRouter } from "next/router";
 import React from "react";
+import { useMutation, useQueryClient } from "react-query";
 import Code from "./Code";
 
 const colorMatch = language => {
@@ -31,27 +41,107 @@ const colorMatch = language => {
 	}
 };
 
-export default function Snippet({ snippet }) {
+export default function Snippet({ snippet, disabled }) {
+	const queryClient = useQueryClient();
+	const token = queryClient.getQueryData("token");
+	const user = queryClient.getQueryData("user");
+	const router = useRouter();
+	const [isAlertOpen, setIsOpen] = React.useState(false);
+	const onClose = () => setIsOpen(false);
+	const cancelRef = React.useRef();
 	const { isOpen, onToggle } = useDisclosure();
+	const toast = useToast();
+
+	const deleteSnippetById = async () => {
+		const response = await fetch(`/api/snippets/${snippet.id}`, {
+			method: "DELETE",
+			headers: {
+				"Content-Type": "application/json",
+				Authorization: `Bearer ${token}`,
+			},
+		});
+
+		const data = await response.json();
+
+		if (data.status === "error") {
+			toast({
+				title: "An error occurred.",
+				position: "top-right",
+				description: data.message,
+				status: "error",
+				duration: 2000,
+				isClosable: true,
+			});
+			onClose();
+		}
+
+		if (data.status === "success") {
+			toast({
+				title: data.message,
+				position: "top-right",
+				description: "We've deleted your snippet",
+				status: "success",
+				duration: 2000,
+				isClosable: true,
+			});
+			onClose();
+		}
+
+		return true;
+	};
+
+	const { mutateAsync, isLoading } = useMutation(deleteSnippetById, {
+		onMutate: () => {
+			const previousSnippets = queryClient.getQueryData("snippets");
+			const updatedSnippets = [...previousSnippets];
+			const removeDeleted = updatedSnippets.filter(
+				item => item.id !== snippet.id
+			);
+
+			queryClient.setQueryData("snippets", removeDeleted);
+
+			return () => queryClient.setQueryData("snippets", previousSnippets);
+		},
+		onSuccess: () => {
+			queryClient.removeQueries(["snippet", snippet.id], { exact: true });
+			queryClient.setQueryData("snippets", prev => [...prev]);
+		},
+	});
+
+	const deleteSnippet = async e => {
+		e.preventDefault();
+		await mutateAsync();
+	};
+
+	const canEdit = parseInt(user?.id) === snippet.user_id;
 
 	return (
 		<Flex
 			flexDirection="column"
-			w={{ base: "90%", md: "70%" }}
+			_hover={{ transform: "scale(1.03)" }}
 			mx="auto"
 			rounded="sm"
-			boxShadow="md"
+			boxShadow="lg"
 			mt={7}
 			p={2}
-			borderWidth={1}
+			borderWidth={useColorModeValue(1, 0)}
+			transition="transform .4s ease-in-out"
+			bg={useColorModeValue("white", "gray.700")}
 		>
-			<Flex justify="space-between" p={4} align="center">
-				<Heading as="h2" fontSize={["lg", "xl", "2xl"]}>
+			<Flex
+				justify="space-between"
+				py={{ base: 2, md: 4 }}
+				px={4}
+				align="center"
+				wrap="wrap"
+			>
+				<Heading as="h2" fontSize={["sm", "md", "lg", "xl"]}>
 					{snippet.name}
 				</Heading>
 				<Tag
 					fontWeight="bold"
-					fontSize={["sm", "md", "md"]}
+					fontSize={["xs", "sm", "md", "lg"]}
+					variant="subtle"
 					py={2}
 					px={2}
 					colorScheme={colorMatch(snippet.language)}
@@ -59,14 +149,17 @@ export default function Snippet({ snippet }) {
 					{snippet.language}
 				</Tag>
 			</Flex>
-			<Text px={4}>{snippet.description}</Text>
+			<Text px={4} fontWeight="semibold" fontSize={["xs", "sm", "md", "md"]}>
+				{snippet.description}
+			</Text>
 			<Button
 				rightIcon={<TriangleDownIcon />}
-				mx={4}
 				my={4}
-				w={{ base: "40%", md: "20%" }}
+				mx={4}
+				rounded="md"
+				w={["35%", "27%", "25%"]}
 				onClick={onToggle}
-				fontSize="sm"
+				fontSize={{ base: "xs", md: "sm", lg: "md", xl: "lg" }}
 				fontWeight="bold"
 				colorScheme="teal"
 			>
@@ -76,10 +169,71 @@ export default function Snippet({ snippet }) {
 			<Collapse in={isOpen} animateOpacity>
 				<Code code={snippet.code} language={snippet.language} />
 			</Collapse>
-			<Stack direction="row" spacing={2} mx={5}>
-				<IconButton icon={<EditIcon />} variant="ghost" color isDisabled />
-				<IconButton icon={<DeleteIcon />} variant="ghost" isDisabled />
-			</Stack>
+			{disabled ? null : (
+				<Stack direction="row" spacing={2} mx={3}>
+					<IconButton
+						icon={<EditIcon />}
+						variant="ghost"
+						fontSize={{ base: "sm", lg: "md", xl: "lg" }}
+						isDisabled={!canEdit}
+						onClick={() => {
+							router.push(`/edit/${snippet.id}`);
+						}}
+						colorScheme="blue"
+					/>
+					<IconButton
+						icon={<DeleteIcon />}
+						variant="ghost"
+						fontSize={{ base: "sm", lg: "md", xl: "lg" }}
+						isDisabled={!canEdit}
+						onClick={() => setIsOpen(true)}
+						isLoading={isLoading}
+						colorScheme="red"
+					/>
+				</Stack>
+			)}
+
+			<AlertDialog
+				isOpen={isAlertOpen}
+				leastDestructiveRef={cancelRef}
+				onClose={onClose}
+				motionPreset="scale"
+			>
+				<AlertDialogOverlay>
+					<AlertDialogContent>
+						<AlertDialogHeader
+							fontSize={{ base: "xs", md: "sm" }}
+							fontWeight="bold"
+						>
+							Delete Snippet
+						</AlertDialogHeader>
+
+						<AlertDialogBody
+							fontSize={{ base: "xs", md: "sm", lg: "md", xl: "lg" }}
+						>
+							Are you sure? You can't undo this action afterwards.
+						</AlertDialogBody>
+
+						<AlertDialogFooter>
+							<Button
+								ref={cancelRef}
+								onClick={onClose}
+								fontSize={{ base: "sm", lg: "md", xl: "lg" }}
+							>
+								Cancel
+							</Button>
+							<Button
+								colorScheme="red"
+								onClick={deleteSnippet}
+								ml={3}
+								fontSize={{ base: "sm", lg: "md", xl: "lg" }}
+							>
+								Delete
+							</Button>
+						</AlertDialogFooter>
+					</AlertDialogContent>
+				</AlertDialogOverlay>
+			</AlertDialog>
 		</Flex>
 	);
 }
