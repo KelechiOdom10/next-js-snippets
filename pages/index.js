@@ -1,34 +1,62 @@
 import Head from "next/head";
 import Navbar from "../components/NavBar";
 import SnippetList from "../components/SnippetList";
-import Welcome from "../components/Welcome";
-import axios from "axios";
+import Hero from "../components/Hero";
+import { fetchAllSnippets } from "../services/api";
+import { useQuery } from "react-query";
+import { Alert, AlertDescription, Box } from "@chakra-ui/react";
+import cookie from "cookie";
 
-axios.defaults.baseURL = process.env.BASE_URL;
+export const getServerSideProps = async ({ req }) => {
+	const parseCookies = req => {
+		return cookie.parse(req ? req.headers.cookie || "" : document.cookie);
+	};
+
+	const isLoggedIn = parseCookies(req);
+
+	if (isLoggedIn.auth) {
+		return {
+			redirect: {
+				destination: "/home",
+				permanent: false,
+			},
+		};
+	}
+
+	const snippets = await fetchAllSnippets();
+	return {
+		props: { snippets: snippets ? snippets : [] },
+	};
+};
 
 export default function Home({ snippets }) {
-  return (
-    <div>
-      <Head>
-        <title>Snippets</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-      <Navbar />
-      <Welcome />
-      <SnippetList snippets={snippets} />
-    </div>
-  );
-}
+	const { error, data } = useQuery("snippets", fetchAllSnippets, {
+		initialData: () => {
+			return snippets;
+		},
+	});
 
-export const getServerSideProps = async () => {
-  let snippets = [];
-  await axios
-    .get("/api/snippets")
-    .then((response) => {
-      snippets = response.data.data;
-    })
-    .catch((error) => console.error(error));
-  return {
-    props: { snippets: snippets }, // will be passed to the page component as props
-  };
-};
+	return (
+		<Box>
+			<Head>
+				<title>Snippets</title>
+				<link rel="icon" href="/favicon.ico" />
+			</Head>
+			<Navbar />
+			<Hero />
+			{error && (
+				<Alert status="error">
+					<AlertDescription>{error.message}</AlertDescription>
+				</Alert>
+			)}
+			{data && (
+				<SnippetList
+					snippets={data}
+					disabled={true}
+					w={{ base: "90%", md: "65%", lg: "60%" }}
+					mx="auto"
+				/>
+			)}
+		</Box>
+	);
+}
