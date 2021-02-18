@@ -3,7 +3,6 @@ import React from "react";
 import { ChakraProvider, extendTheme } from "@chakra-ui/react";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { Hydrate } from "react-query/hydration";
-import { UserContextProvider } from "../context/userState";
 
 const theme = extendTheme({
 	components: {
@@ -25,9 +24,7 @@ function MyApp({ Component, pageProps }) {
 		<ChakraProvider theme={theme}>
 			<QueryClientProvider client={queryClientRef.current}>
 				<Hydrate state={pageProps.dehydratedState}>
-					<UserContextProvider>
-						<Component {...pageProps} />
-					</UserContextProvider>
+					<Component {...pageProps} />
 				</Hydrate>
 			</QueryClientProvider>
 		</ChakraProvider>
