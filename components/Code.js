@@ -70,32 +70,28 @@ const Code = ({ code, language, ...props }) => {
 						as="pre"
 						textAlign="left"
 						m="1em 1.2rem"
-						p={4}
-						overflow={{ base: "scroll", md: "hidden" }}
+						pt={4}
+						px={1}
+						pb={2}
+						zIndex="0"
+						fontSize={{ base: "xs", md: "sm" }}
+						overflowX="auto"
 						className={className}
-						position="relative"
 						style={style}
-						rounded="md"
 					>
 						<Button
-							style={{
-								position: "absolute",
-								top: 0,
-								right: 0,
-								border: "none",
-								boxShadow: "none",
-								textDecoration: "none",
-								margin: "8px",
-								padding: "8px 12px",
-								background: "#E2E8F022",
-								color: "white",
-								borderRadius: "8px",
-								cursor: "pointer",
-								color: "#E2E8F0",
-								fontSize: "14px",
-								fontFamily: "sans-serif",
-								lineHeight: "1",
-							}}
+							size="sm"
+							position="absolute"
+							textTransform="uppercase"
+							colorScheme="teal"
+							fontSize="xs"
+							fontFamily="sans-serif"
+							height="24px"
+							top={1}
+							letterSpacing="wide"
+							zIndex="1"
+							right={{ base: "1.4rem", md: "1.7rem" }}
+							cursor="pointer"
 							onClick={handleCopy}
 						>
 							{isCopied ? "🎉 Copied!" : "Copy"}
@@ -113,6 +109,7 @@ const Code = ({ code, language, ...props }) => {
 									pr="1em"
 									userSelect="none"
 									opacity="0.5"
+									fontSize="xs"
 								>
 									{i + 1}
 								</Box>
