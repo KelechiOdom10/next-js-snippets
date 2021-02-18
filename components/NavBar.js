@@ -1,9 +1,9 @@
 import { Flex, Image, Link, Text, Button, Box } from "@chakra-ui/react";
 import React from "react";
 import ThemeToggler from "./ThemeToggler";
-import { Link as NextLink } from "next/link";
+import { useRouter } from "next/router";
 
-const MenuItems = ({ children, show }) => (
+const MenuItems = ({ children, path }) => (
 	<Text
 		mt={{ base: 4, md: 0 }}
 		mr={{ base: 0, md: 6 }}
@@ -12,10 +12,9 @@ const MenuItems = ({ children, show }) => (
 		fontWeight="bold"
 		letterSpacing="wide"
 		align="center"
-		// borderBottom={show ? "1px" : null}
 		w="100%"
 	>
-		<Link>{children}</Link>
+		<Link href={path}>{children}</Link>
 	</Text>
 );
 
@@ -41,8 +40,9 @@ const MenuIcon = () => (
 	</svg>
 );
 
-export default function NavBar(props) {
+export default function NavBar() {
 	const [show, setShow] = React.useState(false);
+	const router = useRouter();
 	const handleToggle = () => setShow(!show);
 
 	return (
@@ -61,16 +61,16 @@ export default function NavBar(props) {
 			>
 				<Flex align="center" h="60px">
 					<Image
-						// src="https://snippet.ml/wp-content/uploads/snippet-logo.png"
 						src="https://seeklogo.com/images/C/coding-logo-553EFA7061-seeklogo.com.png"
 						h="60%"
 						alt="Snippets Logo"
+						onClick={() => router.push("/")}
 					/>
 				</Flex>
 
 				<Box display={{ base: "flex", md: "none" }} alignItems="center">
 					<ThemeToggler mr={3} />
-					<Box onClick={handleToggle} transition="ease-in">
+					<Box onClick={handleToggle} transition="ease-in" cursor="pointer">
 						{show ? <CloseIcon /> : <MenuIcon />}
 					</Box>
 				</Box>
@@ -91,23 +91,22 @@ export default function NavBar(props) {
 							align="center"
 							mr={3}
 						/>
-						<MenuItems show={show}>Home</MenuItems>
-						<MenuItems show={show}>About</MenuItems>
+						<MenuItems show={show} path="/">
+							Home
+						</MenuItems>
+						<MenuItems show={show} path="/about">
+							About
+						</MenuItems>
 						<Button
 							colorScheme="teal"
-							size={{ base: "sm", md: "md" }}
+							size={{ base: "xs", md: "sm" }}
 							fontWeight="bold"
 							mt={{ base: 4, md: 0 }}
 							px={4}
 							py={2}
+							onClick={() => router.push("/signup")}
 						>
-							<Link
-								as={NextLink}
-								_hover={{ textDecoration: "none" }}
-								href="/signup"
-							>
-								Sign up
-							</Link>
+							Sign up
 						</Button>
 					</Flex>
 				</Box>
