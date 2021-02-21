@@ -15,8 +15,8 @@ export default function Hero() {
 	return (
 		<Flex
 			mx="auto"
-			mt={4}
-			maxW={{ base: "90%", md: "70%", lg: "75%" }}
+			mt={3}
+			maxW={{ base: "100%", md: "70%", lg: "75%" }}
 			align="center"
 		>
 			<Box p={5} mx={3} flexGrow="2">

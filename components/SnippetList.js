@@ -20,7 +20,6 @@ export default function SnippetList({ snippets, disabled, ...props }) {
 	const resetFilters = () => {
 		setLanguage("");
 		setSearchValue("");
-		setUserSnippets(["empty"]);
 		filteredSnippets = snippets;
 	};
 
