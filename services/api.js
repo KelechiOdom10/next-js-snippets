@@ -3,20 +3,17 @@ import router from "next/router";
 export const urls = {
 	test: `${process.env.BASE_URL}`,
 	development: `${process.env.BASE_URL}`,
-	production: `${process.env.VERCEL_URL}`,
+	production: `https://${process.env.NEXT_PUBLIC_VERCEL_URL}`,
 };
 
 export const signup = async (values, toast) => {
-	const response = await fetch(
-		`https://${urls[process.env.NODE_ENV]}/api/signup`,
-		{
-			method: "POST",
-			headers: {
-				"Content-Type": "application/json",
-			},
-			body: JSON.stringify(values),
-		}
-	);
+	const response = await fetch(`${urls[process.env.NODE_ENV]}/api/signup`, {
+		method: "POST",
+		headers: {
+			"Content-Type": "application/json",
+		},
+		body: JSON.stringify(values),
+	});
 	const data = await response.json();
 
 	if (data.status === "error") {
@@ -42,16 +39,13 @@ export const signup = async (values, toast) => {
 };
 
 export const login = async (values, toast) => {
-	const response = await fetch(
-		`https://${urls[process.env.NODE_ENV]}/api/login`,
-		{
-			method: "POST",
-			headers: {
-				"Content-Type": "application/json",
-			},
-			body: JSON.stringify(values),
-		}
-	);
+	const response = await fetch(`${urls[process.env.NODE_ENV]}/api/login`, {
+		method: "POST",
+		headers: {
+			"Content-Type": "application/json",
+		},
+		body: JSON.stringify(values),
+	});
 	const data = await response.json();
 
 	if (data.status === "error") {
@@ -69,7 +63,7 @@ export const login = async (values, toast) => {
 };
 
 export const logout = async () => {
-	await fetch(`https://${urls[process.env.NODE_ENV]}/api/logout`, {
+	await fetch(`${urls[process.env.NODE_ENV]}/api/logout`, {
 		method: "POST",
 		headers: {
 			Accept: "application/json",
@@ -78,9 +72,7 @@ export const logout = async () => {
 };
 
 export const fetchAllSnippets = async () => {
-	const response = await fetch(
-		`https://${urls[process.env.NODE_ENV]}/api/snippets`
-	);
+	const response = await fetch(`${urls[process.env.NODE_ENV]}/api/snippets`);
 	if (!response.ok) {
 		throw new Error("Something went wrong");
 	}
@@ -90,7 +82,7 @@ export const fetchAllSnippets = async () => {
 
 export const fetchSnippetById = async id => {
 	const response = await fetch(
-		`https://${urls[process.env.NODE_ENV]}/api/snippets/${id}`
+		`${urls[process.env.NODE_ENV]}/api/snippets/${id}`
 	);
 	if (!response.ok) {
 		throw new Error("Something went wrong");
