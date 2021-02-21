@@ -72,5 +72,5 @@ VALUES (
 		'Use Router Hook in Next.js',
 		'JavaScript',
 		'const router = useRouter();',
-		1
+		3
 	)
