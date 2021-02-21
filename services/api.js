@@ -1,13 +1,13 @@
 import router from "next/router";
 
-let urls = {
+export const urls = {
 	test: `http://localhost:3000`,
 	development: "http://localhost:3000",
-	// production: 'https://your-production-url.com'
+	production: process.env.VERCEL_URL,
 };
 
 export const signup = async (values, toast) => {
-	const response = await fetch("/api/signup", {
+	const response = await fetch(`${urls[process.env.NODE_ENV]}/api/signup`, {
 		method: "POST",
 		headers: {
 			"Content-Type": "application/json",
@@ -39,7 +39,7 @@ export const signup = async (values, toast) => {
 };
 
 export const login = async (values, toast) => {
-	const response = await fetch("/api/login", {
+	const response = await fetch(`${urls[process.env.NODE_ENV]}/api/login`, {
 		method: "POST",
 		headers: {
 			"Content-Type": "application/json",
@@ -63,7 +63,7 @@ export const login = async (values, toast) => {
 };
 
 export const logout = async () => {
-	await fetch(`/api/logout`, {
+	await fetch(`${urls[process.env.NODE_ENV]}/api/logout`, {
 		method: "POST",
 		headers: {
 			Accept: "application/json",
