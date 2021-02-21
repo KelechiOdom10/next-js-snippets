@@ -1,8 +1,8 @@
 import router from "next/router";
 
 export const urls = {
-	test: `${process.env.BASE_url}`,
-	development: `${process.env.BASE_url}`,
+	test: `${process.env.BASE_URL}`,
+	development: `${process.env.BASE_URL}`,
 	production: `https://${process.env.VERCEL_URL}`,
 };
 
