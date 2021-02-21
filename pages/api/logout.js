@@ -1,7 +1,7 @@
 import cookie from "cookie";
-import { handler } from "../../handlers";
+import getHandler from "../../handlers";
 
-export default handler.post(async (req, res) => {
+export default getHandler().post(async (req, res) => {
 	res.setHeader(
 		"Set-Cookie",
 		cookie.serialize("auth", "", {

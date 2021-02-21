@@ -2,9 +2,9 @@ const db = require("../../lib/db").instance;
 import bcrypt from "bcrypt";
 import jwtGenerator from "../../utils/jwtGenerator";
 import cookie from "cookie";
-import { handler } from "../../handlers";
+import getHandler from "../../handlers";
 
-export default handler.post(async (req, res) => {
+export default getHandler().post(async (req, res) => {
 	const { email, password } = req.body;
 	try {
 		const user = await db.query("SELECT * FROM users WHERE email = $1", [
@@ -35,7 +35,7 @@ export default handler.post(async (req, res) => {
 		}
 		const { id, username } = user[0];
 
-		const jwtToken = jwtGenerator(user[0].id, user[0].username);
+		const jwtToken = jwtGenerator(id, username);
 		const stringObj = JSON.stringify({ id, username });
 
 		const token = `${jwtToken};${stringObj}`;

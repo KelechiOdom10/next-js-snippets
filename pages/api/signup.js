@@ -1,9 +1,9 @@
 const db = require("../../lib/db").instance;
 import bcrypt from "bcrypt";
 import jwtGenerator from "../../utils/jwtGenerator";
-import { handler } from "../../handlers";
+import getHandler from "../../handlers";
 
-export default handler.post(async (req, res) => {
+export default getHandler().post(async (req, res) => {
 	const { username, email, password } = req.body;
 	try {
 		const user = await db.query("SELECT * FROM users WHERE email = $1", [

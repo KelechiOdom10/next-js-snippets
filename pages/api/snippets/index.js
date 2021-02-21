@@ -1,11 +1,11 @@
 const db = require("../../../lib/db").instance;
-import { handler } from "../../../handlers";
 import nc from "next-connect";
+import getHandler from "../../../handlers";
 import { authorize } from "../../../middleware/authorize";
 
 const authorization = nc().post("/api/snippets", authorize);
 
-export default handler
+export default getHandler()
 	.use(authorization)
 	.get(async (req, res) => {
 		try {
