@@ -11,6 +11,7 @@ import React, { useState } from "react";
 import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
 import { useMutation, useQueryClient } from "react-query";
+import { urls } from "../services/api";
 
 const CodeWithCodemirror = dynamic(import("./CodeEditor"), {
 	ssr: false,
@@ -29,7 +30,7 @@ function CreateForm() {
 	const toast = useToast();
 
 	const createSnippet = async () => {
-		const response = await fetch(`/api/snippets`, {
+		const response = await fetch(`${urls[process.env.NODE_ENV]}/api/snippets`, {
 			method: "POST",
 			headers: {
 				Accept: "application/json",

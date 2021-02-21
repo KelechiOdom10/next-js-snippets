@@ -22,6 +22,7 @@ import { useRouter } from "next/router";
 import React from "react";
 import { useMutation, useQueryClient } from "react-query";
 import Code from "./Code";
+import { urls } from "../services/api";
 
 const colorMatch = language => {
 	switch (language) {
@@ -53,13 +54,16 @@ export default function Snippet({ snippet, disabled }) {
 	const toast = useToast();
 
 	const deleteSnippetById = async () => {
-		const response = await fetch(`/api/snippets/${snippet.id}`, {
-			method: "DELETE",
-			headers: {
-				"Content-Type": "application/json",
-				Authorization: `Bearer ${token}`,
-			},
-		});
+		const response = await fetch(
+			`${urls[process.env.NODE_ENV]}/api/snippets/${snippet.id}`,
+			{
+				method: "DELETE",
+				headers: {
+					"Content-Type": "application/json",
+					Authorization: `Bearer ${token}`,
+				},
+			}
+		);
 
 		const data = await response.json();
 
@@ -157,7 +161,7 @@ export default function Snippet({ snippet, disabled }) {
 				my={4}
 				mx={4}
 				rounded="md"
-				w={["35%", "27%", "25%"]}
+				w={["37%", "27%", "25%"]}
 				onClick={onToggle}
 				fontSize={{ base: "xs", md: "sm", lg: "md", xl: "lg" }}
 				fontWeight="bold"

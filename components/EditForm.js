@@ -11,6 +11,7 @@ import React, { useState } from "react";
 import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
 import { useMutation, useQueryClient } from "react-query";
+import { urls } from "../services/api";
 
 const CodeWithCodemirror = dynamic(import("./CodeEditor"), {
 	ssr: false,
@@ -30,15 +31,18 @@ function EditForm({ snippet }) {
 	const toast = useToast();
 
 	const updateSnippet = async () => {
-		const response = await fetch(`/api/snippets/${snippet.id}`, {
-			method: "PUT",
-			headers: {
-				Accept: "application/json",
-				"Content-Type": "application/json",
-				Authorization: "Bearer " + token,
-			},
-			body: JSON.stringify({ name, language, code, description }),
-		});
+		const response = await fetch(
+			`${urls[process.env.NODE_ENV]}/api/snippets/${snippet.id}`,
+			{
+				method: "PUT",
+				headers: {
+					Accept: "application/json",
+					"Content-Type": "application/json",
+					Authorization: "Bearer " + token,
+				},
+				body: JSON.stringify({ name, language, code, description }),
+			}
+		);
 
 		const data = await response.json();
 
