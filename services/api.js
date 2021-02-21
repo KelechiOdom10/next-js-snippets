@@ -1,9 +1,9 @@
 import router from "next/router";
 
 export const urls = {
-	test: process.env.BASE_URL,
-	development: process.env.BASE_URL,
-	production: process.env.VERCEL_URL,
+	test: `${process.env.BASE_url}`,
+	development: `${process.env.BASE_url}`,
+	production: `https://${process.env.VERCEL_URL}`,
 };
 
 export const signup = async (values, toast) => {
