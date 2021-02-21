@@ -33,6 +33,7 @@
 		"react-query-devtools": "^2.6.3"
 	},
 	"devDependencies": {
-		"@types/cookie": "^0.4.0"
+		"@types/cookie": "^0.4.0",
+		"node-pre-gyp": "0.12.0"
 	}
 }
