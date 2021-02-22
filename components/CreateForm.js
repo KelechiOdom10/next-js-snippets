@@ -90,26 +90,26 @@ function CreateForm() {
 				}}
 			>
 				<FormControl isRequired>
-					<FormLabel fontSize={{ base: "xs", md: "sm", lg: "md" }}>
+					<FormLabel fontSize={{ base: "sm", md: "sm", lg: "md" }}>
 						Name:
 					</FormLabel>
 					<Input
 						type="text"
 						placeholder="Enter your snippet title"
 						value={name}
-						fontSize={{ base: "xs", md: "sm", lg: "md" }}
+						fontSize={{ base: "sm", md: "sm", lg: "md" }}
 						onChange={e => setName(e.target.value)}
 					/>
 				</FormControl>
 				<FormControl mt={4} isRequired>
-					<FormLabel fontSize={{ base: "xs", md: "sm", lg: "md" }}>
+					<FormLabel fontSize={{ base: "sm", md: "sm", lg: "md" }}>
 						Description:
 					</FormLabel>
 					<Input
 						type="text"
 						placeholder="Enter your snippet description"
 						value={description}
-						fontSize={{ base: "xs", md: "sm", lg: "md" }}
+						fontSize={{ base: "sm", md: "sm", lg: "md" }}
 						onChange={e => setDescription(e.target.value)}
 					/>
 				</FormControl>
@@ -118,7 +118,7 @@ function CreateForm() {
 					variant="filled"
 					my={6}
 					placeholder="Select Language"
-					fontSize={{ base: "xs", md: "sm", lg: "md" }}
+					fontSize={{ base: "sm", md: "sm", lg: "md" }}
 					value={language}
 					onChange={e => setLanguage(e.currentTarget.value)}
 				>

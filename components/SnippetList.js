@@ -32,7 +32,7 @@ export default function SnippetList({ snippets, disabled, ...props }) {
 					onChange={e => setSearchValue(e.target.value.toLowerCase())}
 					placeholder="Search snippets by name, description or language"
 					_placeholder={{ fontStyle: "italic" }}
-					fontSize={{ base: "xs", md: "sm", lg: "md" }}
+					fontSize={{ base: "sm", md: "sm", lg: "md" }}
 				/>
 			</Flex>
 
@@ -42,7 +42,7 @@ export default function SnippetList({ snippets, disabled, ...props }) {
 					variant="filled"
 					value={language}
 					width="45%"
-					fontSize={{ base: "xs", md: "sm", lg: "md", xl: "lg" }}
+					fontSize={{ base: "sm", md: "sm", lg: "md", xl: "lg" }}
 					fontWeight="semibold"
 					onChange={e => setLanguage(e.currentTarget.value)}
 					isRequired
@@ -63,7 +63,7 @@ export default function SnippetList({ snippets, disabled, ...props }) {
 					ml={5}
 					rounded="md"
 					borderWidth={2}
-					fontSize={{ base: "xs", md: "sm", lg: "md", xl: "lg" }}
+					fontSize={{ base: "sm", md: "sm", lg: "md", xl: "lg" }}
 					fontWeight="semibold"
 					onClick={resetFilters}
 				>

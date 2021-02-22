@@ -74,7 +74,7 @@ const Code = ({ code, language, ...props }) => {
 						px={1}
 						pb={2}
 						zIndex="0"
-						fontSize={{ base: "xs", md: "sm" }}
+						fontSize={{ base: "sm", md: "md" }}
 						overflowX="auto"
 						className={className}
 						style={style}
@@ -84,7 +84,7 @@ const Code = ({ code, language, ...props }) => {
 							position="absolute"
 							textTransform="uppercase"
 							colorScheme="teal"
-							fontSize="xs"
+							fontSize={{ base: "xs", md: "sm" }}
 							fontFamily="sans-serif"
 							height="24px"
 							top={1}

@@ -16,10 +16,10 @@ function TabsList({ snippets }) {
 			isManual
 		>
 			<TabList>
-				<Tab fontWeight="bold" fontSize={{ base: "xs", md: "sm", lg: "md" }}>
+				<Tab fontWeight="bold" fontSize={{ base: "sm", md: "sm", lg: "md" }}>
 					All snippets
 				</Tab>
-				<Tab fontWeight="bold" fontSize={{ base: "xs", md: "sm", lg: "md" }}>
+				<Tab fontWeight="bold" fontSize={{ base: "sm", md: "sm", lg: "md" }}>
 					My Snippets
 				</Tab>
 			</TabList>

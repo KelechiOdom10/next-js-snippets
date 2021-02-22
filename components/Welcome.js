@@ -46,7 +46,7 @@ export default function Welcome() {
 				mt={6}
 				rounded="lg"
 				borderWidth={2}
-				fontSize={{ base: "xs", md: "sm", lg: "md", xl: "lg" }}
+				fontSize={{ base: "sm", md: "sm", lg: "md", xl: "lg" }}
 				fontWeight="bold"
 				boxShadow="md"
 				onClick={() => router.push("/create")}
