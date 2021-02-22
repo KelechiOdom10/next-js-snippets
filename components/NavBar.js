@@ -97,6 +97,9 @@ export default function NavBar() {
 						<MenuItems show={show} path="/about">
 							About
 						</MenuItems>
+						<MenuItems show={show} path="/contact">
+							About
+						</MenuItems>
 						<Button
 							colorScheme="teal"
 							size={{ base: "xs", md: "sm" }}

@@ -76,6 +76,12 @@ export default function UserNavBar() {
 								>
 									About
 								</MenuItem>
+								<MenuItem
+									fontSize={{ base: "xs", md: "md" }}
+									onClick={() => router.push("/contact")}
+								>
+									Contact
+								</MenuItem>
 								<MenuItem fontSize={{ base: "xs", md: "md" }} onClick={logout}>
 									Logout
 								</MenuItem>
