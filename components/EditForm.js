@@ -159,6 +159,7 @@ function EditForm({ snippet }) {
 					<option value="CSS">CSS</option>
 					<option value="Python">Python</option>
 					<option value="SQL">SQL</option>
+					<option value="TypeScript">TypeScript</option>
 					<option value="XML">XML</option>
 					<option value="JSX">JSX</option>
 					<option value="PHP">PHP</option>
