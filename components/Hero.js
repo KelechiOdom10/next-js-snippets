@@ -54,7 +54,7 @@ export default function Hero() {
 
 			<Image
 				mx="auto"
-				maxW="50%"
+				maxW="45%"
 				h="80%"
 				src="https://therenegadecoder.com/wp-content/uploads/2020/05/python-dictionary-syntax.png"
 				alt="Snippets Demo Screenshot"
