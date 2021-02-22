@@ -52,7 +52,7 @@ export default function UserNavBar() {
 								<MenuItem>
 									<Avatar
 										bg="teal.500"
-										size="xs"
+										size="sm"
 										name={user?.username}
 										mr="12px"
 										color="white"
@@ -65,24 +65,27 @@ export default function UserNavBar() {
 							<MenuDivider />
 							<MenuGroup>
 								<MenuItem
-									fontSize={{ base: "xs", md: "md" }}
+									fontSize={{ base: "sm", md: "md" }}
 									onClick={() => router.push("/home")}
 								>
 									Home
 								</MenuItem>
 								<MenuItem
-									fontSize={{ base: "xs", md: "md" }}
+									fontSize={{ base: "sm", md: "md" }}
 									onClick={() => router.push("/about")}
 								>
 									About
 								</MenuItem>
 								<MenuItem
-									fontSize={{ base: "xs", md: "md" }}
-									onClick={() => router.push("/contact")}
+									fontSize={{ base: "sm", md: "md" }}
+									onClick={e => {
+										window.location.href = "mailto:kelechi.odom@yahoo.com";
+										e.preventDefault();
+									}}
 								>
 									Contact
 								</MenuItem>
-								<MenuItem fontSize={{ base: "xs", md: "md" }} onClick={logout}>
+								<MenuItem fontSize={{ base: "sm", md: "md" }} onClick={logout}>
 									Logout
 								</MenuItem>
 							</MenuGroup>
