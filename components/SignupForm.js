@@ -139,7 +139,7 @@ export default function SignupForm() {
 				<Button
 					fontWeight="bold"
 					colorScheme="teal"
-					width={{ base: "40%", md: "full" }}
+					width={{ base: formState.isSubmitting ? "50%" : "40%", md: "full" }}
 					mt={4}
 					size={{ base: "sm", md: "md" }}
 					px={4}
