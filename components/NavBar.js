@@ -97,9 +97,24 @@ export default function NavBar() {
 						<MenuItems show={show} path="/about">
 							About
 						</MenuItems>
-						<MenuItems show={show} path="/contact">
-							About
-						</MenuItems>
+						<Button
+							color="teal.800"
+							size={{ base: "xs", md: "sm" }}
+							fontWeight="bold"
+							mt={{ base: 4, md: 0 }}
+							_hover={{ bgColor: "none", color: "none" }}
+							px={4}
+							py={2}
+							bg="teal.100"
+							mr={{ base: 0, md: 3 }}
+							onClick={e => {
+								window.location.href = "mailto:kelechi.odom@yahoo.com";
+								e.preventDefault();
+							}}
+						>
+							Contact
+						</Button>
+
 						<Button
 							colorScheme="teal"
 							size={{ base: "xs", md: "sm" }}
