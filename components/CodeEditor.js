@@ -20,6 +20,7 @@ function CodeEditor({ theme, language, code, setCode }) {
 			case "xml":
 				return "htmlmixed";
 			case "jsx":
+			case "typescript":
 				return "javascript";
 			default:
 				return language?.toLowerCase();

@@ -31,7 +31,7 @@ export default function SignupForm() {
 				<FormControl isInvalid={errors.username} isRequired>
 					<FormLabel
 						htmlFor="username"
-						fontSize={{ base: "xs", md: "sm", lg: "md" }}
+						fontSize={{ base: "sm", md: "sm", lg: "md" }}
 					>
 						Username
 					</FormLabel>
@@ -40,7 +40,7 @@ export default function SignupForm() {
 						name="username"
 						type="text"
 						placeholder="Enter your username"
-						fontSize={{ base: "xs", md: "sm", lg: "md" }}
+						fontSize={{ base: "sm", md: "sm", lg: "md" }}
 						ref={register({
 							required: "Username is required",
 							validate: value => {
@@ -52,7 +52,7 @@ export default function SignupForm() {
 							},
 						})}
 					/>
-					<FormErrorMessage fontSize={{ base: "xs", md: "sm", lg: "md" }}>
+					<FormErrorMessage fontSize={{ base: "sm", md: "sm", lg: "md" }}>
 						{errors?.username && errors.username.message}
 					</FormErrorMessage>
 				</FormControl>
@@ -60,7 +60,7 @@ export default function SignupForm() {
 				<FormControl mt={4} isInvalid={errors.email} isRequired>
 					<FormLabel
 						htmlFor="email"
-						fontSize={{ base: "xs", md: "sm", lg: "md" }}
+						fontSize={{ base: "sm", md: "sm", lg: "md" }}
 					>
 						Email address
 					</FormLabel>
@@ -69,7 +69,7 @@ export default function SignupForm() {
 						id="email"
 						name="email"
 						placeholder="Enter your email address"
-						fontSize={{ base: "xs", md: "sm", lg: "md" }}
+						fontSize={{ base: "sm", md: "sm", lg: "md" }}
 						ref={register({
 							required: "Email is required",
 							pattern: {
@@ -78,7 +78,7 @@ export default function SignupForm() {
 							},
 						})}
 					/>
-					<FormErrorMessage fontSize={{ base: "xs", md: "sm", lg: "md" }}>
+					<FormErrorMessage fontSize={{ base: "sm", md: "sm", lg: "md" }}>
 						{errors?.email && errors.email.message}
 					</FormErrorMessage>
 				</FormControl>
@@ -86,7 +86,7 @@ export default function SignupForm() {
 				<FormControl mt={4} isInvalid={errors.password} isRequired>
 					<FormLabel
 						htmlFor="password"
-						fontSize={{ base: "xs", md: "sm", lg: "md" }}
+						fontSize={{ base: "sm", md: "sm", lg: "md" }}
 					>
 						Password
 					</FormLabel>
@@ -97,7 +97,7 @@ export default function SignupForm() {
 							pr="4.5rem"
 							type={show ? "text" : "password"}
 							placeholder="Enter password"
-							fontSize={{ base: "xs", md: "sm", lg: "md" }}
+							fontSize={{ base: "sm", md: "sm", lg: "md" }}
 							ref={register({
 								required: "Password is required",
 								minLength: {
@@ -122,13 +122,13 @@ export default function SignupForm() {
 							/>
 						</InputRightElement>
 					</InputGroup>
-					<FormErrorMessage fontSize={{ base: "xs", md: "sm", lg: "md" }}>
+					<FormErrorMessage fontSize={{ base: "sm", md: "sm", lg: "md" }}>
 						{errors?.password && errors.password.message}
 					</FormErrorMessage>
 				</FormControl>
 
 				<Box>
-					<Text fontSize={{ base: "xs", md: "sm", lg: "md" }}>
+					<Text fontSize={{ base: "sm", md: "sm", lg: "md" }}>
 						Already have an account?{" "}
 						<Link color="teal.500" fontWeight="bold" href="/login">
 							Login
@@ -139,7 +139,7 @@ export default function SignupForm() {
 				<Button
 					fontWeight="bold"
 					colorScheme="teal"
-					width={{ base: "40%", md: "full" }}
+					width={{ base: formState.isSubmitting ? "50%" : "40%", md: "full" }}
 					mt={4}
 					size={{ base: "sm", md: "md" }}
 					px={4}

@@ -6,6 +6,7 @@ import { fetchSnippetById } from "../../services/api";
 import { useQuery, useQueryClient } from "react-query";
 import { SpinnerIcon } from "@chakra-ui/icons";
 import EditForm from "../../components/EditForm";
+import Layout from "../../components/Layout";
 
 export const getServerSideProps = async ({ req, params }) => {
 	const id = params.id;
@@ -60,20 +61,25 @@ export default function UpdateSnippet({ snippet, id }) {
 	queryClient.getQueryData("user");
 
 	return (
-		<Flex flexDir="column" h="100vh" m="0 auto">
-			<UserNavBar />
-			{error && (
-				<Alert status="error">
-					<AlertDescription>{error.message}, Please refresh</AlertDescription>
-				</Alert>
-			)}
-			{isLoading && (
-				<Flex align="center" justify="center">
-					<SpinnerIcon color="teal" />
-				</Flex>
-			)}
-			{data && <EditForm snippet={data} />}
-			<ReactQueryDevtools />
-		</Flex>
+		<Layout
+			title="Snippets | Edit Page - edit your code snippets"
+			description="Snippets Edit Page"
+		>
+			<Flex flexDir="column" h="100vh" m="0 auto">
+				<UserNavBar />
+				{error && (
+					<Alert status="error">
+						<AlertDescription>{error.message}, Please refresh</AlertDescription>
+					</Alert>
+				)}
+				{isLoading && (
+					<Flex align="center" justify="center">
+						<SpinnerIcon color="teal" />
+					</Flex>
+				)}
+				{data && <EditForm snippet={data} />}
+				<ReactQueryDevtools />
+			</Flex>
+		</Layout>
 	);
 }

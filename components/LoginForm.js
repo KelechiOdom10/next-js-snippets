@@ -32,7 +32,7 @@ export default function LoginForm() {
 				<FormControl isInvalid={errors.email} isRequired>
 					<FormLabel
 						htmlFor="login_email"
-						fontSize={{ base: "xs", md: "sm", lg: "md" }}
+						fontSize={{ base: "sm", md: "sm", lg: "md" }}
 					>
 						Email address
 					</FormLabel>
@@ -42,7 +42,7 @@ export default function LoginForm() {
 						placeholder="Enter your email address"
 						name="email"
 						placeholder="Enter your email address"
-						fontSize={{ base: "xs", md: "sm", lg: "md" }}
+						fontSize={{ base: "sm", md: "sm", lg: "md" }}
 						ref={register({
 							required: "Email is required",
 							pattern: {
@@ -51,7 +51,7 @@ export default function LoginForm() {
 							},
 						})}
 					/>
-					<FormErrorMessage fontSize={{ base: "xs", md: "sm", lg: "md" }}>
+					<FormErrorMessage fontSize={{ base: "sm", md: "sm", lg: "md" }}>
 						{errors?.email && errors.email.message}
 					</FormErrorMessage>
 				</FormControl>
@@ -59,7 +59,7 @@ export default function LoginForm() {
 				<FormControl mt={4} isInvalid={errors.password} isRequired>
 					<FormLabel
 						htmlFor="login_password"
-						fontSize={{ base: "xs", md: "sm", lg: "md" }}
+						fontSize={{ base: "sm", md: "sm", lg: "md" }}
 					>
 						Password
 					</FormLabel>
@@ -69,7 +69,7 @@ export default function LoginForm() {
 							id="login_password"
 							type={show ? "text" : "password"}
 							placeholder="Enter password"
-							fontSize={{ base: "xs", md: "sm", lg: "md" }}
+							fontSize={{ base: "sm", md: "sm", lg: "md" }}
 							name="password"
 							ref={register({ required: "Password is required" })}
 						/>
@@ -83,13 +83,13 @@ export default function LoginForm() {
 							/>
 						</InputRightElement>
 					</InputGroup>
-					<FormErrorMessage fontSize={{ base: "xs", md: "sm", lg: "md" }}>
+					<FormErrorMessage fontSize={{ base: "sm", md: "sm", lg: "md" }}>
 						{errors?.password && errors.password.message}
 					</FormErrorMessage>
 				</FormControl>
 
 				<Box>
-					<Text fontSize={{ base: "xs", md: "sm", lg: "md" }}>
+					<Text fontSize={{ base: "sm", md: "sm", lg: "md" }}>
 						Don't have an account?{" "}
 						<Link color="teal.500" fontWeight="bold" href="/signup">
 							Sign up
@@ -100,7 +100,7 @@ export default function LoginForm() {
 				<Button
 					fontWeight="bold"
 					colorScheme="teal"
-					width={{ base: "40%", md: "full" }}
+					width={{ base: formState.isSubmitting ? "50%" : "40%", md: "full" }}
 					mt={4}
 					size={{ base: "sm", md: "md" }}
 					px={4}

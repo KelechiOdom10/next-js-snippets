@@ -45,7 +45,7 @@ export default function UserSnippetList({ snippets }) {
 					onChange={e => setSearchValue(e.target.value.toLowerCase())}
 					placeholder="Search snippets by name, description or language"
 					_placeholder={{ fontStyle: "italic" }}
-					fontSize={{ base: "xs", md: "sm", lg: "md" }}
+					fontSize={{ base: "sm", md: "sm", lg: "md" }}
 				/>
 			</Flex>
 
@@ -55,7 +55,7 @@ export default function UserSnippetList({ snippets }) {
 					variant="filled"
 					value={language}
 					width="45%"
-					fontSize={{ base: "xs", md: "sm", lg: "md", xl: "lg" }}
+					fontSize={{ base: "sm", md: "sm", lg: "md", xl: "lg" }}
 					fontWeight="semibold"
 					onChange={e => setLanguage(e.currentTarget.value)}
 					isRequired
@@ -65,6 +65,7 @@ export default function UserSnippetList({ snippets }) {
 					<option value="CSS">CSS</option>
 					<option value="Python">Python</option>
 					<option value="SQL">SQL</option>
+					<option value="PHP">TypeScript</option>
 					<option value="XML">XML</option>
 					<option value="JSX">JSX</option>
 					<option value="PHP">PHP</option>
@@ -75,7 +76,7 @@ export default function UserSnippetList({ snippets }) {
 					ml={5}
 					rounded="md"
 					borderWidth={2}
-					fontSize={{ base: "xs", md: "sm", lg: "md", xl: "lg" }}
+					fontSize={{ base: "sm", md: "sm", lg: "md", xl: "lg" }}
 					fontWeight="semibold"
 					onClick={resetFilters}
 				>
@@ -84,13 +85,13 @@ export default function UserSnippetList({ snippets }) {
 			</Flex>
 
 			{filteredSnippets.length > 0 ? (
-				filteredSnippets.map(snippet => (
-					<Snippet key={snippet.id} snippet={snippet} />
-				))
+				filteredSnippets
+					.filter(snippet => (language ? snippet.language === language : true))
+					.map(snippet => <Snippet key={snippet.id} snippet={snippet} />)
 			) : (
 				<Alert
 					status="info"
-					fontSize={{ base: "xs", md: "sm", lg: "md", xl: "lg" }}
+					fontSize={{ base: "sm", md: "sm", lg: "md", xl: "lg" }}
 				>
 					<AlertIcon />
 					You currently have no snippets created. Click the create button to get

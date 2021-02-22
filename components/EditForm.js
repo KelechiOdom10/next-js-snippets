@@ -122,26 +122,26 @@ function EditForm({ snippet }) {
 				}}
 			>
 				<FormControl isRequired>
-					<FormLabel fontSize={{ base: "xs", md: "sm", lg: "md" }}>
+					<FormLabel fontSize={{ base: "sm", md: "sm", lg: "md" }}>
 						Name:
 					</FormLabel>
 					<Input
 						type="text"
 						placeholder="Enter your snippet title"
 						value={name}
-						fontSize={{ base: "xs", md: "sm", lg: "md" }}
+						fontSize={{ base: "sm", md: "sm", lg: "md" }}
 						onChange={e => setName(e.target.value)}
 					/>
 				</FormControl>
 				<FormControl mt={4} isRequired>
-					<FormLabel fontSize={{ base: "xs", md: "sm", lg: "md" }}>
+					<FormLabel fontSize={{ base: "sm", md: "sm", lg: "md" }}>
 						Description:
 					</FormLabel>
 					<Input
 						type="text"
 						placeholder="Enter your snippet description"
 						value={description}
-						fontSize={{ base: "xs", md: "sm", lg: "md" }}
+						fontSize={{ base: "sm", md: "sm", lg: "md" }}
 						onChange={e => setDescription(e.target.value)}
 					/>
 				</FormControl>
@@ -150,7 +150,7 @@ function EditForm({ snippet }) {
 					variant="filled"
 					my={6}
 					placeholder="Select Language"
-					fontSize={{ base: "xs", md: "sm", lg: "md" }}
+					fontSize={{ base: "sm", md: "sm", lg: "md" }}
 					value={language}
 					onChange={e => setLanguage(e.currentTarget.value)}
 				>
@@ -159,6 +159,7 @@ function EditForm({ snippet }) {
 					<option value="CSS">CSS</option>
 					<option value="Python">Python</option>
 					<option value="SQL">SQL</option>
+					<option value="TypeScript">TypeScript</option>
 					<option value="XML">XML</option>
 					<option value="JSX">JSX</option>
 					<option value="PHP">PHP</option>

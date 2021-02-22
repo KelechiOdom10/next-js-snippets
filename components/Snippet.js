@@ -139,7 +139,7 @@ export default function Snippet({ snippet, disabled }) {
 				align="center"
 				wrap="wrap"
 			>
-				<Heading as="h2" fontSize={["sm", "md", "lg", "xl"]}>
+				<Heading as="h2" fontSize={["md", "md", "lg", "xl"]}>
 					{snippet.name}
 				</Heading>
 				<Tag
@@ -153,7 +153,7 @@ export default function Snippet({ snippet, disabled }) {
 					{snippet.language}
 				</Tag>
 			</Flex>
-			<Text px={4} fontWeight="semibold" fontSize={["xs", "sm", "md", "md"]}>
+			<Text px={4} fontWeight="semibold" fontSize={["sm", "sm", "md", "md"]}>
 				{snippet.description}
 			</Text>
 			<Button
@@ -163,7 +163,7 @@ export default function Snippet({ snippet, disabled }) {
 				rounded="md"
 				w={["37%", "27%", "25%"]}
 				onClick={onToggle}
-				fontSize={{ base: "xs", md: "sm", lg: "md", xl: "lg" }}
+				fontSize={{ base: "sm", md: "sm", lg: "md", xl: "lg" }}
 				fontWeight="bold"
 				colorScheme="teal"
 			>
