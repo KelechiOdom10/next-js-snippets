@@ -8,6 +8,7 @@ import { useQuery, useQueryClient } from "react-query";
 import TabsList from "../components/Tabs";
 import { ReactQueryDevtools } from "react-query/devtools";
 import { fetchAllSnippets } from "../services/api";
+import Layout from "../components/Layout";
 
 export const getServerSideProps = async ({ req }) => {
 	const parseCookies = async req => {
@@ -52,20 +53,18 @@ export default function Main({ user, token, snippets }) {
 	});
 	const { data: updatedUser } = useQuery("user", () => resolvedUser, {
 		initialData: () => resolvedUser,
-		staleTime: Infinity,
+		staleTime: 1000 * 3610,
 	});
 	const { data: userToken } = useQuery("token", () => token, {
 		initialData: () => token,
-		staleTime: Infinity,
+		staleTime: 1000 * 3610,
 	});
 
 	return (
-		<div>
-			<Head>
-				<title>Snippets Home Page</title>
-				<link rel="icon" href="/favicon.ico" />
-			</Head>
-
+		<Layout
+			title="Snippets | Home Page - view, create, edit, copy and delete code snippets"
+			description="Snippets Home Page where you can view, create, edit, copy and delete code snippets"
+		>
 			<UserNavbar />
 			<Welcome />
 			{error && (
@@ -80,6 +79,6 @@ export default function Main({ user, token, snippets }) {
 			)}
 			{data && <TabsList snippets={data} />}
 			<ReactQueryDevtools />
-		</div>
+		</Layout>
 	);
 }

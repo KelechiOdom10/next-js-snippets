@@ -1,4 +1,3 @@
-import Head from "next/head";
 import Navbar from "../components/NavBar";
 import SnippetList from "../components/SnippetList";
 import Hero from "../components/Hero";
@@ -6,6 +5,7 @@ import { fetchAllSnippets } from "../services/api";
 import { useQuery } from "react-query";
 import { Alert, AlertDescription, Box } from "@chakra-ui/react";
 import cookie from "cookie";
+import Layout from "../components/Layout";
 
 export const getServerSideProps = async ({ req }) => {
 	const parseCookies = req => {
@@ -37,11 +37,10 @@ export default function Home({ snippets }) {
 	});
 
 	return (
-		<Box>
-			<Head>
-				<title>Snippets</title>
-				<link rel="icon" href="/favicon.ico" />
-			</Head>
+		<Layout
+			title="Snippets | Code Snippets for Developers"
+			description="Copy Code Snippets to enhance your workflow"
+		>
 			<Navbar />
 			<Hero />
 			{error && (
@@ -57,6 +56,6 @@ export default function Home({ snippets }) {
 					mx="auto"
 				/>
 			)}
-		</Box>
+		</Layout>
 	);
 }
