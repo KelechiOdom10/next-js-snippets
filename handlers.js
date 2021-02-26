@@ -14,5 +14,5 @@ export default function getHandler() {
 		},
 	})
 		.use(bodyParser.urlencoded({ extended: false }))
-		.use(cors({ origin: process.env.NEXT_URL }));
+		.use(cors({ origin: [process.env.NEXT_PUBLIC_URL, process.env.NEXT_URL] }));
 }
