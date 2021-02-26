@@ -1,6 +1,10 @@
 import "../styles/globals.css";
 import React from "react";
-import { ChakraProvider, theme } from "@chakra-ui/react";
+import {
+	ChakraProvider,
+	extendTheme,
+	theme as chakraTheme,
+} from "@chakra-ui/react";
 import { Global, css } from "@emotion/react";
 import "focus-visible/dist/focus-visible";
 import { QueryClient, QueryClientProvider } from "react-query";
@@ -12,6 +16,22 @@ const GlobalStyles = css`
 		box-shadow: none;
 	}
 `;
+
+const theme = extendTheme({
+	...chakraTheme,
+	fonts: {
+		...chakraTheme.fonts,
+		heading: `Nunito,-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, sans-serif`,
+		body: `Roboto Mono, Nunito, -apple-system, BlinkMacSystemFont, Segoe UI, Oxygen, monospace, sans-serif`,
+	},
+	colors: {
+		...chakraTheme.colors,
+		teal: {
+			50: "#CCF5EF",
+			400: "#32a09a",
+		},
+	},
+});
 
 function MyApp({ Component, pageProps }) {
 	const queryClientRef = React.useRef();
