@@ -13,6 +13,6 @@ export default function getHandler() {
 			res.status(501).json({ status: "error", message: error.message });
 		},
 	})
-		.use(bodyParser.urlencoded({ extended: false }))
-		.use(cors({ origin: [process.env.NEXT_PUBLIC_URL, process.env.NEXT_URL] }));
+		.use(cors())
+		.use(bodyParser.urlencoded({ extended: false }));
 }
