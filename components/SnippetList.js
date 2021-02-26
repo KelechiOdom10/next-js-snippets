@@ -1,4 +1,12 @@
-import { Box, Button, Flex, Input, Select } from "@chakra-ui/react";
+import {
+	Alert,
+	AlertIcon,
+	Box,
+	Button,
+	Flex,
+	Input,
+	Select,
+} from "@chakra-ui/react";
 import React, { useState } from "react";
 
 import Snippet from "./Snippet";
@@ -31,7 +39,10 @@ export default function SnippetList({ snippets, disabled, ...props }) {
 					value={searchValue}
 					onChange={e => setSearchValue(e.target.value.toLowerCase())}
 					placeholder="Search snippets by name, description or language"
-					_placeholder={{ fontStyle: "italic" }}
+					_placeholder={{
+						fontStyle: "italic",
+						fontSize: { base: "xs", md: "sm", lg: "md" },
+					}}
 					fontSize={{ base: "sm", md: "sm", lg: "md" }}
 				/>
 			</Flex>
@@ -42,6 +53,7 @@ export default function SnippetList({ snippets, disabled, ...props }) {
 					variant="filled"
 					value={language}
 					width="45%"
+					overflowX="hidden"
 					fontSize={{ base: "sm", md: "sm", lg: "md", xl: "lg" }}
 					fontWeight="semibold"
 					onChange={e => setLanguage(e.currentTarget.value)}
@@ -71,12 +83,30 @@ export default function SnippetList({ snippets, disabled, ...props }) {
 				</Button>
 			</Flex>
 
-			{snippets &&
+			{filteredSnippets < 1 ||
+			filteredSnippets.filter(snippet =>
+				language ? snippet.language === language : true
+			) < 1 ? (
+				<Alert
+					status="info"
+					fontSize={{ base: "sm", md: "sm", lg: "md", xl: "lg" }}
+				>
+					<AlertIcon />
+					Oops no snippets returned, please refine your search!
+				</Alert>
+			) : (
+				snippets &&
 				filteredSnippets
 					.filter(snippet => (language ? snippet.language === language : true))
 					.map(snippet => (
-						<Snippet key={snippet.id} snippet={snippet} disabled={disabled} />
-					))}
+						<Snippet
+							key={snippet.id}
+							snippet={snippet}
+							disabled={disabled}
+							setLanguage={setLanguage}
+						/>
+					))
+			)}
 		</Box>
 	);
 }

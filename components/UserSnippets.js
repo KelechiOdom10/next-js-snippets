@@ -44,7 +44,10 @@ export default function UserSnippetList({ snippets }) {
 					value={searchValue}
 					onChange={e => setSearchValue(e.target.value.toLowerCase())}
 					placeholder="Search snippets by name, description or language"
-					_placeholder={{ fontStyle: "italic" }}
+					_placeholder={{
+						fontStyle: "italic",
+						fontSize: { base: "xs", md: "sm", lg: "md" },
+					}}
 					fontSize={{ base: "sm", md: "sm", lg: "md" }}
 				/>
 			</Flex>
@@ -87,7 +90,13 @@ export default function UserSnippetList({ snippets }) {
 			{filteredSnippets.length > 0 ? (
 				filteredSnippets
 					.filter(snippet => (language ? snippet.language === language : true))
-					.map(snippet => <Snippet key={snippet.id} snippet={snippet} />)
+					.map(snippet => (
+						<Snippet
+							key={snippet.id}
+							snippet={snippet}
+							setLanguage={setLanguage}
+						/>
+					))
 			) : (
 				<Alert
 					status="info"
