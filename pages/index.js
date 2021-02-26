@@ -6,6 +6,7 @@ import { useQuery } from "react-query";
 import { Alert, AlertDescription, Box } from "@chakra-ui/react";
 import cookie from "cookie";
 import Layout from "../components/Layout";
+import Footer from "../components/Footer";
 
 export const getServerSideProps = async ({ req }) => {
 	const parseCookies = req => {
@@ -40,22 +41,27 @@ export default function Home({ snippets }) {
 		<Layout
 			title="Snippets | Code Snippets for Developers"
 			description="Copy Code Snippets to enhance your workflow"
+			minHeight="100vh"
 		>
-			<Navbar />
-			<Hero />
-			{error && (
-				<Alert status="error">
-					<AlertDescription>{error.message}</AlertDescription>
-				</Alert>
-			)}
-			{data && (
-				<SnippetList
-					snippets={data}
-					disabled={true}
-					w={{ base: "90%", md: "65%", lg: "60%" }}
-					mx="auto"
-				/>
-			)}
+			<Box pb="100px">
+				<Navbar />
+				<Hero />
+				{error && (
+					<Alert status="error">
+						<AlertDescription>{error.message}</AlertDescription>
+					</Alert>
+				)}
+				{data && (
+					<SnippetList
+						snippets={data}
+						disabled={true}
+						w={{ base: "90%", md: "65%", lg: "60%" }}
+						mx="auto"
+						mb={10}
+					/>
+				)}
+			</Box>
+			<Footer showList />
 		</Layout>
 	);
 }

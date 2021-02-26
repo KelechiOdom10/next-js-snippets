@@ -16,12 +16,12 @@ export default function Hero() {
 		<Flex
 			mx="auto"
 			mt={3}
-			maxW={{ base: "100%", md: "70%", lg: "75%" }}
+			maxW={{ base: "100%", md: "80%", lg: "75%" }}
 			align="center"
 		>
 			<Box p={5} mx={3} flexGrow="2">
 				<Heading
-					fontSize={{ base: "1.4rem", md: "3xl", lg: "4xl" }}
+					fontSize={{ base: "1.6rem", md: "3xl", lg: "4xl" }}
 					lineHeight="1.2"
 				>
 					Code Snippets for{" "}
@@ -32,7 +32,7 @@ export default function Hero() {
 				<Text
 					mt={3}
 					fontSize={{ base: "sm", md: "sm", lg: "md" }}
-					fontWeight={500}
+					fontWeight="semibold"
 					color={useColorModeValue("gray.700", "gray.300")}
 				>
 					Home to snippets you use everyday in Web development!
@@ -55,10 +55,10 @@ export default function Hero() {
 			<Image
 				mx="auto"
 				maxW="45%"
-				h="80%"
 				src="https://therenegadecoder.com/wp-content/uploads/2020/05/python-dictionary-syntax.png"
 				alt="Snippets Demo Screenshot"
 				display={{ base: "none", md: "flex" }}
+				objectFit="cover"
 			/>
 		</Flex>
 	);

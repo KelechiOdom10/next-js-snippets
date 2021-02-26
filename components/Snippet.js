@@ -1,4 +1,9 @@
-import { TriangleDownIcon, EditIcon, DeleteIcon } from "@chakra-ui/icons";
+import {
+	TriangleUpIcon,
+	TriangleDownIcon,
+	EditIcon,
+	DeleteIcon,
+} from "@chakra-ui/icons";
 import {
 	Flex,
 	Heading,
@@ -42,7 +47,7 @@ const colorMatch = language => {
 	}
 };
 
-export default function Snippet({ snippet, disabled }) {
+export default function Snippet({ snippet, disabled, setLanguage }) {
 	const queryClient = useQueryClient();
 	const token = queryClient.getQueryData("token");
 	const user = queryClient.getQueryData("user");
@@ -148,27 +153,28 @@ export default function Snippet({ snippet, disabled }) {
 					variant="subtle"
 					py={2}
 					px={2}
+					cursor="pointer"
+					onClick={() => setLanguage(snippet.language)}
 					colorScheme={colorMatch(snippet.language)}
 				>
 					{snippet.language}
 				</Tag>
 			</Flex>
-			<Text px={4} fontWeight="semibold" fontSize={["sm", "sm", "md", "md"]}>
+			<Text px={4} fontWeight="medium" fontSize={["xs", "sm", "md", "md"]}>
 				{snippet.description}
 			</Text>
 			<Button
-				rightIcon={<TriangleDownIcon />}
+				rightIcon={isOpen ? <TriangleUpIcon /> : <TriangleDownIcon />}
 				my={4}
 				mx={4}
 				rounded="md"
-				w={["37%", "27%", "25%"]}
+				w={["44%", "27%", "23%"]}
 				onClick={onToggle}
 				fontSize={{ base: "sm", md: "sm", lg: "md", xl: "lg" }}
 				fontWeight="bold"
 				colorScheme="teal"
 			>
-				{" "}
-				Show more
+				Show {isOpen ? "Less" : "More"}
 			</Button>
 			<Collapse in={isOpen} animateOpacity>
 				<Code code={snippet.code} language={snippet.language} />

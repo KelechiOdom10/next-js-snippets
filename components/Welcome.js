@@ -33,7 +33,7 @@ export default function Welcome() {
 			<Text
 				mt={3}
 				fontSize={{ base: "sm", md: "sm", lg: "md" }}
-				fontWeight={500}
+				fontWeight="semibold"
 				color={useColorModeValue("gray.700", "gray.300")}
 			>
 				Create snippets for everyone to view and use!
@@ -41,12 +41,12 @@ export default function Welcome() {
 			<Button
 				leftIcon={<AddIcon />}
 				colorScheme="teal"
-				maxW={{ base: "40%", md: "30%", lg: "25%" }}
+				w={{ base: "49%", md: "32%", lg: "30%" }}
 				variant="outline"
 				mt={6}
 				rounded="lg"
 				borderWidth={2}
-				fontSize={{ base: "sm", md: "sm", lg: "md", xl: "lg" }}
+				fontSize={{ base: "xs", md: "sm", lg: "md", xl: "lg" }}
 				fontWeight="bold"
 				boxShadow="md"
 				onClick={() => router.push("/create")}

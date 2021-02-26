@@ -1,4 +1,12 @@
-import { Flex, Image, Link, Text, Button, Box } from "@chakra-ui/react";
+import {
+	Flex,
+	Image,
+	Link,
+	Text,
+	Button,
+	Box,
+	IconButton,
+} from "@chakra-ui/react";
 import React from "react";
 import ThemeToggler from "./ThemeToggler";
 import { useRouter } from "next/router";
@@ -46,89 +54,79 @@ export default function NavBar() {
 	const handleToggle = () => setShow(!show);
 
 	return (
-		<>
-			<Flex
-				as="nav"
-				py={3}
-				px={8}
-				justify="space-between"
-				wrap="wrap"
-				w={{ base: "100%", md: "90%" }}
-				m="0 auto"
-				align="center"
-				color="teal"
-				boxShadow={{ base: show ? "md" : "none", md: "none" }}
-			>
-				<Flex align="center" h="60px">
-					<Image
-						src="https://seeklogo.com/images/C/coding-logo-553EFA7061-seeklogo.com.png"
-						h="60%"
-						alt="Snippets Logo"
-						onClick={() => router.push("/")}
-					/>
-				</Flex>
-
-				<Box display={{ base: "flex", md: "none" }} alignItems="center">
-					<ThemeToggler mr={3} />
-					<Box onClick={handleToggle} transition="ease-in" cursor="pointer">
-						{show ? <CloseIcon /> : <MenuIcon />}
-					</Box>
-				</Box>
-
-				<Box
-					display={{ base: show ? "block" : "none", md: "block" }}
-					flexBasis={{ base: "100%", md: "auto" }}
-					align="center"
-				>
-					<Flex
-						alignItems="center"
-						justify={["center", "space-between", "flex-end", "flex-end"]}
-						direction={["column", "column", "row", "row"]}
-						pt={[0, 0, 0, 0]}
-					>
-						<ThemeToggler
-							display={{ base: "none", md: "flex" }}
-							align="center"
-							mr={3}
-						/>
-						<MenuItems show={show} path="/">
-							Home
-						</MenuItems>
-						<MenuItems show={show} path="/about">
-							About
-						</MenuItems>
-						<Button
-							color="teal.800"
-							size={{ base: "xs", md: "sm" }}
-							fontWeight="bold"
-							mt={{ base: 4, md: 0 }}
-							_hover={{ bgColor: "none", color: "none" }}
-							px={4}
-							py={2}
-							bg="teal.100"
-							mr={{ base: 0, md: 3 }}
-							onClick={e => {
-								window.location.href = "mailto:kelechi.odom@yahoo.com";
-								e.preventDefault();
-							}}
-						>
-							Contact
-						</Button>
-
-						<Button
-							colorScheme="teal"
-							size={{ base: "xs", md: "sm" }}
-							fontWeight="bold"
-							mt={{ base: 4, md: 0 }}
-							px={4}
-							py={2}
-							onClick={() => router.push("/signup")}
-						>
-							Sign up
-						</Button>
-					</Flex>
-				</Box>
+		<Flex
+			as="nav"
+			py={3}
+			px={{ base: 8, md: 16 }}
+			justify="space-between"
+			wrap="wrap"
+			align="center"
+			color="teal"
+			boxShadow={{ base: show ? "md" : "none", md: "none" }}
+		>
+			<Flex align="center" h="60px">
+				<Image
+					src="/coding-logo.png"
+					h="60%"
+					alt="Snippets Logo"
+					cursor="pointer"
+					onClick={() => router.push("/")}
+				/>
 			</Flex>
-		</>
+
+			<Box display={{ base: "flex", md: "none" }} alignItems="center">
+				<ThemeToggler mr={3} />
+				<IconButton
+					icon={show ? <CloseIcon /> : <MenuIcon />}
+					variant="unstyled"
+					onClick={handleToggle}
+					transition="ease-in"
+				/>
+			</Box>
+
+			<Box
+				display={{ base: show ? "block" : "none", md: "block" }}
+				flexBasis={{ base: "100%", md: "auto" }}
+				align="center"
+			>
+				<Flex
+					alignItems="center"
+					justify={["center", "space-between", "flex-end", "flex-end"]}
+					direction={["column", "column", "row", "row"]}
+					pt={[0, 0, 0, 0]}
+				>
+					<ThemeToggler
+						display={{ base: "none", md: "flex" }}
+						align="center"
+						mr={3}
+					/>
+					<MenuItems show={show} path="/">
+						Home
+					</MenuItems>
+					<MenuItems show={show} path="/about">
+						About
+					</MenuItems>
+					<MenuItems show={show} path="mailto:kelechi.odom@yahoo.com">
+						Contact
+					</MenuItems>
+
+					<Button
+						color="teal.800"
+						_hover={{ bgColor: "teal.100", color: "none" }}
+						bg="teal.50"
+						rounded="md"
+						size={{ base: "xs", md: "sm" }}
+						fontWeight="bold"
+						mt={{ base: 4, md: 0 }}
+						px={4}
+						py={2}
+						mr={{ base: 0, md: 3 }}
+						onClick={() => router.push("/signup")}
+					>
+						Sign up
+					</Button>
+				</Flex>
+			</Box>
+		</Flex>
 	);
 }
