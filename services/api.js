@@ -3,7 +3,7 @@ import router from "next/router";
 export const urls = {
 	test: "http://localhost:3000",
 	development: "http://localhost:3000",
-	production: `http://localhost:3000`,
+	production: `https://${process.env.NEXT_PUBLIC_VERCEL_URL}`,
 };
 
 export const signup = async (values, toast) => {
