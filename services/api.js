@@ -45,6 +45,7 @@ export const login = async (values, toast) => {
 			"Content-Type": "application/json",
 		},
 		body: JSON.stringify(values),
+		credentials: true,
 	});
 	const data = await response.json();
 
