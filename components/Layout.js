@@ -1,16 +1,11 @@
+import { Box } from "@chakra-ui/react";
 import Head from "next/head";
 import React from "react";
-
-const Layout = ({ children, title, description }) => (
-	<>
+const Layout = ({ children, title, description, ...props }) => (
+	<Box {...props} position="relative">
 		<Head>
 			<title>{title}</title>
-			<link
-				rel="icon"
-				href="https://seeklogo.com/images/C/coding-logo-553EFA7061-seeklogo.com.png"
-				type="image/png"
-				sizes="16x18"
-			/>
+			<link rel="icon" href="/coding-logo.png" type="image/png" sizes="16x18" />
 			<meta
 				name="viewport"
 				content="width=device-width, initial-scale=1.0, maximum-scale=1.0"
@@ -18,7 +13,7 @@ const Layout = ({ children, title, description }) => (
 			<meta name="description" content={description} />
 		</Head>
 		{children}
-	</>
+	</Box>
 );
 
 export default Layout;
