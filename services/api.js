@@ -3,7 +3,7 @@ import router from "next/router";
 export const urls = {
 	test: "http://localhost:3000",
 	development: "http://localhost:3000",
-	production: `https://${process.env.NEXT_PUBLIC_VERCEL_URL}`,
+	production: `http://localhost:3000`,
 };
 
 export const signup = async (values, toast) => {
@@ -45,7 +45,6 @@ export const login = async (values, toast) => {
 			"Content-Type": "application/json",
 		},
 		body: JSON.stringify(values),
-		credentials: true,
 	});
 	const data = await response.json();
 
