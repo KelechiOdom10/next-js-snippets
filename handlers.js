@@ -1,6 +1,7 @@
 import bodyParser from "body-parser";
 import cors from "cors";
 import nextConnect from "next-connect";
+import { urls } from "./services/api";
 
 export default function getHandler() {
 	return nextConnect({
@@ -14,7 +15,7 @@ export default function getHandler() {
 			res.status(501).json({ status: "error", message: error.message });
 		},
 	})
-		.use(cors({ origin: [/.*next-js-snippets.*/], credentials: true }))
-		.options("*", cors());
-	// .use(bodyParser.urlencoded({ extended: false }))
+		.use(cors({ origin: `${urls[process.env.NODE_ENV]}`, credentials: true }))
+		.options("*", cors())
+		.use(bodyParser.urlencoded({ extended: false }));
 }
