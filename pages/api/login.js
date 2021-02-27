@@ -45,7 +45,7 @@ export default getHandler().post(async (req, res) => {
 			cookie.serialize("auth", token, {
 				httpOnly: true,
 				secure: process.env.NODE_ENV !== "development",
-				sameSite: "strict",
+				sameSite: process.env.NODE_ENV !== "development" ? "none" : true,
 				maxAge: 3600,
 				path: "/",
 			})
