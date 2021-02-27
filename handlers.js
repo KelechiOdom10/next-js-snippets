@@ -13,7 +13,7 @@ export default function getHandler() {
 			res.status(501).json({ status: "error", message: error.message });
 		},
 	})
-		.use(cors({ origin: "*" }))
+		.use(cors({ origin: "*", credentials: true }))
 		.options("*", cors())
 		.use(bodyParser.urlencoded({ extended: false }));
 }
