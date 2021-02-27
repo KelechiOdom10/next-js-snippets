@@ -13,7 +13,6 @@ export const signup = async (values, toast) => {
 			"Content-Type": "application/json",
 		},
 		body: JSON.stringify(values),
-		credentials: "include",
 	});
 	const data = await response.json();
 
@@ -45,8 +44,6 @@ export const login = async (values, toast) => {
 		headers: {
 			"Content-Type": "application/json",
 		},
-		body: JSON.stringify(values),
-		credentials: "include",
 	});
 	const data = await response.json();
 
@@ -70,7 +67,6 @@ export const logout = async () => {
 		headers: {
 			Accept: "application/json",
 		},
-		credentials: "include",
 	}).then(() => router.push("/"));
 };
 
