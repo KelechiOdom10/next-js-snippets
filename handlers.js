@@ -14,6 +14,6 @@ export default function getHandler() {
 		},
 	})
 		.use(cors({ origin: [/.*next-js-snippets.*/], credentials: true }))
-		.options("*", cors())
+		.options("*", cors({ origin: [/.*next-js-snippets.*/] }))
 		.use(bodyParser.urlencoded({ extended: false }));
 }
