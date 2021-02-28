@@ -18,7 +18,6 @@ export default function getHandler() {
 			cors({
 				origin: `https://${process.env.NEXT_DOMAIN}`,
 				exposedHeaders: ["Set-Cookie"],
-				allowedHeaders: ["Set-Cookie"],
 				credentials: true,
 			})
 		)
