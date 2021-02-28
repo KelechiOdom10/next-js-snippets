@@ -15,7 +15,10 @@ export default function getHandler() {
 		},
 	})
 		.use(
-			cors({ origin: process.env.NEXT_PUBLIC_VERCEL_URL, credentials: true })
+			cors({
+				origin: `https://${process.env.NEXT_DOMAIN}`,
+				credentials: true,
+			})
 		)
 		.options("*", cors({ maxAge: 86400 }))
 		.use(bodyParser.urlencoded({ extended: false }));

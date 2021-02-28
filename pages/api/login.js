@@ -45,7 +45,6 @@ export default getHandler().post(async (req, res) => {
 		res.setHeader(
 			"Set-Cookie",
 			cookie.serialize("auth", token, {
-				domain: isProduction && process.env.NEXT_URL,
 				httpOnly: true,
 				secure: isProduction,
 				sameSite: isProduction ? "none" : true,
