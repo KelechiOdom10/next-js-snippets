@@ -15,13 +15,9 @@ export const getServerSideProps = async ({ req }) => {
 
 	const isLoggedIn = parseCookies(req);
 
-	if (isLoggedIn.auth) {
-		return {
-			redirect: {
-				destination: "/home",
-				permanent: false,
-			},
-		};
+	if (!isLoggedIn["auth"]) {
+		res.writeHead(302, { Location: "/home" });
+		res.end();
 	}
 
 	const snippets = await fetchAllSnippets();
