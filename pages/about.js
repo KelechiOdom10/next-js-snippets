@@ -13,7 +13,7 @@ export default function About() {
 				{" "}
 				<Heading>Coming Soon!</Heading>
 			</Box>
-			<Footer />
+			<Footer showList />
 		</Layout>
 	);
 }

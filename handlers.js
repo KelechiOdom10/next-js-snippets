@@ -14,7 +14,9 @@ export default function getHandler() {
 			res.status(501).json({ status: "error", message: error.message });
 		},
 	})
-		.use(cors({ origin: [/.*next-js-snippets.*/], credentials: true }))
+		.use(
+			cors({ origin: process.env.NEXT_PUBLIC_VERCEL_URL, credentials: true })
+		)
 		.options("*", cors({ maxAge: 86400 }))
 		.use(bodyParser.urlencoded({ extended: false }));
 }
