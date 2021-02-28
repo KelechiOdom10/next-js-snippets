@@ -27,13 +27,10 @@ export const getServerSideProps = async ({ req }) => {
 
 	const isLoggedIn = parseCookies(req);
 
-	if (!isLoggedIn.auth) {
-		return {
-			redirect: {
-				destination: "/",
-				permanent: false,
-			},
-		};
+	if (!isLoggedIn["auth"]) {
+		res.writeHead(302, { Location: "/" });
+		res.end();
 	}
+
 	return { props: {} };
 };

@@ -4,6 +4,8 @@ import jwtGenerator from "../../utils/jwtGenerator";
 import cookie from "cookie";
 import getHandler from "../../handlers";
 
+const isProduction = process.env.NODE_ENV === "production";
+
 export default getHandler().post(async (req, res) => {
 	const { email, password } = req.body;
 	try {
@@ -43,9 +45,10 @@ export default getHandler().post(async (req, res) => {
 		res.setHeader(
 			"Set-Cookie",
 			cookie.serialize("auth", token, {
+				domain: isProduction && process.env.NEXT_URL,
 				httpOnly: true,
-				secure: process.env.NODE_ENV !== "development",
-				sameSite: "strict",
+				secure: isProduction,
+				sameSite: isProduction ? "none" : true,
 				maxAge: 3600,
 				path: "/",
 			})
