@@ -8,16 +8,20 @@ import cookie from "cookie";
 import Layout from "../components/Layout";
 import Footer from "../components/Footer";
 
-export const getServerSideProps = async ({ req, res }) => {
+export const getServerSideProps = async ({ req }) => {
 	const parseCookies = req => {
 		return cookie.parse(req ? req.headers.cookie || "" : document.cookie);
 	};
 
 	const isLoggedIn = parseCookies(req);
 
-	if (!isLoggedIn["auth"]) {
-		res.writeHead(302, { Location: "/home" });
-		res.end();
+	if (isLoggedIn["auth"]) {
+		return {
+			redirect: {
+				destination: "/home",
+				permanent: false,
+			},
+		};
 	}
 
 	const snippets = await fetchAllSnippets();
