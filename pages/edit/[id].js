@@ -8,7 +8,7 @@ import { SpinnerIcon } from "@chakra-ui/icons";
 import EditForm from "../../components/EditForm";
 import Layout from "../../components/Layout";
 
-export const getServerSideProps = async ({ req, params }) => {
+export const getServerSideProps = async ({ req, params, res }) => {
 	const id = params.id;
 	const parseCookies = req => {
 		return cookie.parse(req ? req.headers.cookie || "" : document.cookie);
