@@ -2,8 +2,6 @@ import bodyParser from "body-parser";
 import cors from "cors";
 import nextConnect from "next-connect";
 
-const isProduction = process.env.NODE_ENV === "production";
-
 export default function getHandler() {
 	return nextConnect({
 		onNoMatch(req, res) {
@@ -16,9 +14,7 @@ export default function getHandler() {
 			res.status(501).json({ status: "error", message: error.message });
 		},
 	})
-		.use(
-			cors({ origin: isProduction && process.env.NEXT_URL, credentials: true })
-		)
-		.options("*", cors({ maxAge: 86400, credentials: true }))
+		.use(cors({ origin: process.env.NEXT_URL, credentials: true }))
+		.options("*", cors())
 		.use(bodyParser.urlencoded({ extended: false }));
 }
