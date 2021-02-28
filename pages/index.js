@@ -8,7 +8,7 @@ import cookie from "cookie";
 import Layout from "../components/Layout";
 import Footer from "../components/Footer";
 
-export const getServerSideProps = async ({ req }) => {
+export const getServerSideProps = async ({ req, res }) => {
 	const parseCookies = req => {
 		return cookie.parse(req ? req.headers.cookie || "" : document.cookie);
 	};
