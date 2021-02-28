@@ -7,6 +7,7 @@ export default function About() {
 		<Layout
 			title="Snippets | About Page"
 			description="The story being the Snippets Project"
+			minHeight="100vh"
 		>
 			<Box pb="100px">
 				{" "}
