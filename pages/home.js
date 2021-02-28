@@ -10,7 +10,7 @@ import { ReactQueryDevtools } from "react-query/devtools";
 import { fetchAllSnippets } from "../services/api";
 import Layout from "../components/Layout";
 
-export const getServerSideProps = async ({ req, res }) => {
+export const getServerSideProps = async ({ req }) => {
 	const parseCookies = async req => {
 		return cookie.parse(req ? req.headers.cookie || "" : document.cookie);
 	};
@@ -18,10 +18,11 @@ export const getServerSideProps = async ({ req, res }) => {
 	const isLoggedIn = await parseCookies(req);
 
 	if (!isLoggedIn["auth"]) {
-		res.writeHead(302, { Location: "/" });
-		res.end();
 		return {
-			props: {},
+			redirect: {
+				destination: "/",
+				permanent: false,
+			},
 		};
 	}
 

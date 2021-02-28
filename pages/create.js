@@ -20,7 +20,7 @@ export default function CreateSnippet() {
 	);
 }
 
-export const getServerSideProps = async ({ req, res }) => {
+export const getServerSideProps = async ({ req }) => {
 	const parseCookies = req => {
 		return cookie.parse(req ? req.headers.cookie || "" : document.cookie);
 	};
@@ -28,9 +28,12 @@ export const getServerSideProps = async ({ req, res }) => {
 	const isLoggedIn = parseCookies(req);
 
 	if (!isLoggedIn["auth"]) {
-		res.writeHead(302, { Location: "/" });
-		res.end();
+		return {
+			redirect: {
+				destination: "/",
+				permanent: false,
+			},
+		};
 	}
-
 	return { props: {} };
 };
