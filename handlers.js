@@ -20,7 +20,6 @@ export default function getHandler() {
 				origin: isProduction
 					? [/.*next-js-snippets.*/]
 					: "http://localhost:3000",
-				exposedHeaders: ["set-cookie"],
 				credentials: true,
 			})
 		)
