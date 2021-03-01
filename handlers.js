@@ -1,4 +1,3 @@
-import bodyParser from "body-parser";
 import cors from "cors";
 import nextConnect from "next-connect";
 
@@ -25,6 +24,5 @@ export default function getHandler() {
 				credentials: true,
 			})
 		)
-		.options("*", cors())
-		.use(bodyParser.urlencoded({ extended: false }));
+		.options("*", cors());
 }
