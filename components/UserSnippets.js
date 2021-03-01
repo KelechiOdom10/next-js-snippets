@@ -68,7 +68,7 @@ export default function UserSnippetList({ snippets }) {
 					<option value="CSS">CSS</option>
 					<option value="Python">Python</option>
 					<option value="SQL">SQL</option>
-					<option value="PHP">TypeScript</option>
+					<option value="TypeScript">TypeScript</option>
 					<option value="XML">XML</option>
 					<option value="JSX">JSX</option>
 					<option value="PHP">PHP</option>
@@ -88,15 +88,31 @@ export default function UserSnippetList({ snippets }) {
 			</Flex>
 
 			{filteredSnippets.length > 0 ? (
-				filteredSnippets
-					.filter(snippet => (language ? snippet.language === language : true))
-					.map(snippet => (
-						<Snippet
-							key={snippet.id}
-							snippet={snippet}
-							setLanguage={setLanguage}
-						/>
-					))
+				filteredSnippets < 1 ||
+				filteredSnippets.filter(snippet =>
+					language ? snippet.language === language : true
+				) < 1 ? (
+					<Alert
+						status="info"
+						fontSize={{ base: "sm", md: "sm", lg: "md", xl: "lg" }}
+					>
+						<AlertIcon />
+						Oops no snippets returned, please refine your search!
+					</Alert>
+				) : (
+					snippets &&
+					filteredSnippets
+						.filter(snippet =>
+							language ? snippet.language === language : true
+						)
+						.map(snippet => (
+							<Snippet
+								key={snippet.id}
+								snippet={snippet}
+								setLanguage={setLanguage}
+							/>
+						))
+				)
 			) : (
 				<Alert
 					status="info"
