@@ -19,7 +19,7 @@ export default function getHandler() {
 		.use(
 			cors({
 				origin: isProduction
-					? `https://${process.env.NEXT_PUBLIC_VERCEL_URL}`
+					? [/.*next-js-snippets.*/]
 					: "http://localhost:3000",
 				exposedHeaders: ["set-cookie"],
 				credentials: true,
