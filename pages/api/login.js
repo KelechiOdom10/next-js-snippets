@@ -45,6 +45,7 @@ export default getHandler().post(async (req, res) => {
 		res.setHeader(
 			"Set-Cookie",
 			cookie.serialize("auth", token, {
+				domain: isProduction ? process.env.NEXT_PUBLIC_VERCEL_URL : "localhost",
 				httpOnly: true,
 				secure: isProduction,
 				sameSite: isProduction ? "none" : true,

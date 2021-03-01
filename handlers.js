@@ -2,6 +2,8 @@ import bodyParser from "body-parser";
 import cors from "cors";
 import nextConnect from "next-connect";
 
+const isProduction = process.env.NODE_ENV === "production";
+
 export default function getHandler() {
 	return nextConnect({
 		onNoMatch(req, res) {
@@ -16,11 +18,13 @@ export default function getHandler() {
 	})
 		.use(
 			cors({
-				origin: `https://${process.env.NEXT_DOMAIN}`,
+				origin: isProduction
+					? `https://${process.env.NEXT_PUBLIC_VERCEL_URL}`
+					: "http://localhost:3000",
 				exposedHeaders: ["set-cookie"],
 				credentials: true,
 			})
 		)
-		.options("*", cors({ maxAge: 86400 }))
+		.options("*", cors())
 		.use(bodyParser.urlencoded({ extended: false }));
 }
