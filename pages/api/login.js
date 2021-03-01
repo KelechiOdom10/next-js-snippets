@@ -48,7 +48,7 @@ export default getHandler().post(async (req, res) => {
 				domain: isProduction ? process.env.NEXT_PUBLIC_VERCEL_URL : "localhost",
 				httpOnly: true,
 				secure: isProduction,
-				sameSite: isProduction ? "none" : true,
+				sameSite: isProduction ? "none" : "strict",
 				maxAge: 3600,
 				path: "/",
 			})
