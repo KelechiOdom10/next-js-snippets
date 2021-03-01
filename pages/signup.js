@@ -19,7 +19,7 @@ export default function LoginArea() {
 				flexDir="column"
 				maxWidth={{ base: "90%", md: "80%" }}
 				m="0 auto"
-				pb="100px"
+				pb="150px"
 			>
 				<Flex mb={4} align="center" justify="space-between">
 					<Flex align="center" h="60px">
