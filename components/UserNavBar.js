@@ -1,7 +1,6 @@
 import {
 	Flex,
 	Avatar,
-	Image,
 	MenuItem,
 	Menu,
 	MenuButton,
@@ -15,6 +14,7 @@ import ThemeToggler from "./ThemeToggler";
 import { logout } from "../services/api";
 import { useRouter } from "next/router";
 import { useQueryClient } from "react-query";
+import Logo from "./Logo";
 
 export default function UserNavBar() {
 	const queryClient = useQueryClient();
@@ -26,24 +26,29 @@ export default function UserNavBar() {
 			as="nav"
 			py={3}
 			px={{ base: 8, md: 16 }}
+			mt={2}
 			justify="space-between"
+			justifyItems="center"
 			wrap="wrap"
 			align="center"
 			color="teal"
 		>
-			<Flex align="center" h="60px">
-				<Image
-					src="/coding-logo.png"
-					h="60%"
-					alt="Snippets Logo"
-					onClick={() => router.push("/")}
-					cursor="pointer"
-				/>
-			</Flex>
+			<Logo
+				height="2.25rem"
+				fill="teal"
+				onClick={() => router.push("/")}
+				cursor="pointer"
+			/>
 			<Flex flexDir="row" align="center">
 				<ThemeToggler align="center" mr={3} />
 				<Menu>
-					<MenuButton as={Avatar} bg="teal.500" size="sm" cursor="pointer" />
+					<Avatar
+						as={MenuButton}
+						bg="teal.500"
+						size="sm"
+						cursor="pointer"
+						_focus={{ boxShadow: "outline" }}
+					/>
 					<MenuList>
 						<MenuGroup title="Profile">
 							<MenuItem>

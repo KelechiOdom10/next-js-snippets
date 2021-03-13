@@ -1,10 +1,11 @@
-import { Box, Heading, Flex, Image } from "@chakra-ui/react";
+import { Heading, Flex } from "@chakra-ui/react";
 import LoginForm from "../components/LoginForm";
 import ThemeToggler from "../components/ThemeToggler";
 import cookie from "cookie";
 import { useRouter } from "next/router";
 import Layout from "../components/Layout";
 import Footer from "../components/Footer";
+import Logo from "../components/Logo";
 
 export default function LoginArea() {
 	const router = useRouter();
@@ -19,22 +20,19 @@ export default function LoginArea() {
 				flexDir="column"
 				maxWidth={{ base: "90%", md: "70%" }}
 				m="0 auto"
-				pb="100px"
+				pb="150px"
 			>
-				<Flex mb={8} align="center" justify="space-between">
-					<Flex align="center" h="60px">
-						<Image
-							src="/coding-logo.png"
-							h="60%"
-							alt="Snippets Logo"
-							cursor="pointer"
-							onClick={() => router.push("/")}
-						/>
-					</Flex>
-
+				<Flex mb={8} mt={2} align="center" justify="space-between">
+					<Logo
+						height="2.25rem"
+						fill="teal"
+						onClick={() => router.push("/")}
+						cursor="pointer"
+					/>
 					<ThemeToggler />
 				</Flex>
-				<Box
+				<Flex
+					flexDir="column"
 					borderWidth={1}
 					py={3}
 					px={6}
@@ -47,7 +45,7 @@ export default function LoginArea() {
 						Sign In to Your Account
 					</Heading>
 					<LoginForm />
-				</Box>
+				</Flex>
 			</Flex>
 			<Footer />
 		</Layout>
