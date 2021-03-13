@@ -55,10 +55,12 @@ export default function Hero() {
 			<Image
 				mx="auto"
 				maxW="45%"
-				src="https://therenegadecoder.com/wp-content/uploads/2020/05/python-dictionary-syntax.png"
+				src="/coding-hero.png"
 				alt="Snippets Demo Screenshot"
 				display={{ base: "none", md: "flex" }}
 				objectFit="cover"
+				loading="lazy"
+				decoding="async"
 			/>
 		</Flex>
 	);
