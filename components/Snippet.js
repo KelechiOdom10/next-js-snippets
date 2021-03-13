@@ -149,6 +149,7 @@ export default function Snippet({ snippet, disabled, setLanguage }) {
 				</Heading>
 				<Tag
 					fontWeight="bold"
+					aria-label={snippet.language}
 					fontSize={["xs", "sm", "md", "lg"]}
 					variant="subtle"
 					py={2}
@@ -183,6 +184,7 @@ export default function Snippet({ snippet, disabled, setLanguage }) {
 				<Stack direction="row" spacing={2} mx={3}>
 					<IconButton
 						icon={<EditIcon />}
+						aria-label="Edit Snippet Button"
 						variant="ghost"
 						fontSize={{ base: "sm", lg: "md", xl: "lg" }}
 						isDisabled={!canEdit}
@@ -193,6 +195,7 @@ export default function Snippet({ snippet, disabled, setLanguage }) {
 					/>
 					<IconButton
 						icon={<DeleteIcon />}
+						aria-label="Delete Snippet Button"
 						variant="ghost"
 						fontSize={{ base: "sm", lg: "md", xl: "lg" }}
 						isDisabled={!canEdit}

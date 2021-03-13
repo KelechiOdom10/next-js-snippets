@@ -10,6 +10,8 @@ import {
 import React from "react";
 import ThemeToggler from "./ThemeToggler";
 import { useRouter } from "next/router";
+import Logo from "./Logo";
+import { IoMdClose, IoMdMenu } from "react-icons/io";
 
 const MenuItems = ({ children, path }) => (
 	<Text
@@ -26,29 +28,7 @@ const MenuItems = ({ children, path }) => (
 	</Text>
 );
 
-const CloseIcon = () => (
-	<svg width="24" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
-		<title>Close</title>
-		<path
-			fill="teal"
-			d="M9.00023 7.58599L13.9502 2.63599L15.3642 4.04999L10.4142 8.99999L15.3642 13.95L13.9502 15.364L9.00023 10.414L4.05023 15.364L2.63623 13.95L7.58623 8.99999L2.63623 4.04999L4.05023 2.63599L9.00023 7.58599Z"
-		/>
-	</svg>
-);
-
-const MenuIcon = () => (
-	<svg
-		width="24px"
-		viewBox="0 0 20 20"
-		xmlns="http://www.w3.org/2000/svg"
-		fill="teal"
-	>
-		<title>Menu</title>
-		<path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z" />
-	</svg>
-);
-
-export default function NavBar() {
+export default function NavBar({ noDisplay }) {
 	const [show, setShow] = React.useState(false);
 	const router = useRouter();
 	const handleToggle = () => setShow(!show);
@@ -56,31 +36,32 @@ export default function NavBar() {
 	return (
 		<Flex
 			as="nav"
-			py={3}
-			px={{ base: 8, md: 16 }}
+			py={5}
+			px={{ base: 6, md: 16 }}
 			justify="space-between"
+			justifyItems="center"
 			wrap="wrap"
 			align="center"
 			color="teal"
 			boxShadow={{ base: show ? "md" : "none", md: "none" }}
 		>
-			<Flex align="center" h="60px">
-				<Image
-					src="/coding-logo.png"
-					h="60%"
-					alt="Snippets Logo"
-					cursor="pointer"
-					onClick={() => router.push("/")}
-				/>
-			</Flex>
+			<Logo
+				height="2.25rem"
+				fill="teal"
+				onClick={() => router.push("/")}
+				cursor="pointer"
+			/>
 
 			<Box display={{ base: "flex", md: "none" }} alignItems="center">
-				<ThemeToggler mr={3} />
+				<ThemeToggler />
 				<IconButton
-					icon={show ? <CloseIcon /> : <MenuIcon />}
+					icon={show ? <IoMdClose fill="teal" /> : <IoMdMenu fill="teal" />}
 					variant="unstyled"
 					onClick={handleToggle}
 					transition="ease-in"
+					fontSize="24px"
+					display="inline-flex"
+					aria-label={show ? "Close Navbar" : "Open Navbar"}
 				/>
 			</Box>
 
@@ -100,15 +81,9 @@ export default function NavBar() {
 						align="center"
 						mr={3}
 					/>
-					<MenuItems show={show} path="/">
-						Home
-					</MenuItems>
-					<MenuItems show={show} path="/about">
-						About
-					</MenuItems>
-					<MenuItems show={show} path="mailto:kelechi.odom@yahoo.com">
-						Contact
-					</MenuItems>
+					<MenuItems path="/">Home</MenuItems>
+					<MenuItems path="/about">About</MenuItems>
+					<MenuItems path="mailto:kelechi.odom@yahoo.com">Contact</MenuItems>
 
 					<Button
 						color="teal.800"
@@ -120,6 +95,7 @@ export default function NavBar() {
 						mt={{ base: 4, md: 0 }}
 						px={4}
 						py={2}
+						display={noDisplay && "none"}
 						mr={{ base: 0, md: 3 }}
 						onClick={() => router.push("/signup")}
 					>

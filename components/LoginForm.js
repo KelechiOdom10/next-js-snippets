@@ -100,7 +100,7 @@ export default function LoginForm() {
 				<Button
 					fontWeight="bold"
 					colorScheme="teal"
-					width={{ base: formState.isSubmitting ? "50%" : "40%", md: "full" }}
+					width={{ base: "full", md: formState.isSubmitting ? "40%" : "30%" }}
 					mt={4}
 					size={{ base: "sm", md: "md" }}
 					px={4}
