@@ -5,7 +5,7 @@ const Layout = ({ children, title, description, ...props }) => (
 	<Box {...props} position="relative">
 		<Head>
 			<title>{title}</title>
-			<link rel="icon" href="/coding-logo.png" type="image/png" sizes="16x18" />
+			<link rel="icon" href="/coding-logo.ico" type="image/x-icon" />
 			<meta
 				name="viewport"
 				content="width=device-width, initial-scale=1.0, maximum-scale=1.0"
