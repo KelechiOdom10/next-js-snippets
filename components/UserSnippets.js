@@ -55,6 +55,7 @@ export default function UserSnippetList({ snippets }) {
 			<Flex my={6} align="center">
 				<Select
 					placeholder="Filter by Language"
+					aria-label="Language dropdown"
 					variant="filled"
 					value={language}
 					width="45%"
