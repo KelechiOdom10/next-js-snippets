@@ -1,6 +1,10 @@
 import Layout from "../components/Layout";
 import Footer from "../components/Footer";
-import { Box, Heading } from "@chakra-ui/react";
+import Navbar from "../components/NavBar";
+import { Box } from "@chakra-ui/react";
+import Introduction from "../components/Introduction";
+import HowItWorks from "../components/HowItWorks";
+import TechStack from "../components/TechStack";
 
 export default function About() {
 	return (
@@ -9,9 +13,11 @@ export default function About() {
 			description="The story being the Snippets Project"
 			minHeight="100vh"
 		>
-			<Box pb="100px">
-				{" "}
-				<Heading>Coming Soon!</Heading>
+			<Navbar noDisplay />
+			<Box pb="100px" w="80%" mx="auto">
+				<Introduction />
+				<HowItWorks />
+				<TechStack />
 			</Box>
 			<Footer showList />
 		</Layout>
