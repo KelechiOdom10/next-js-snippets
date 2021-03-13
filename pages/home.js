@@ -1,4 +1,3 @@
-import Head from "next/head";
 import UserNavbar from "../components/UserNavBar";
 import cookie from "cookie";
 import { SpinnerIcon } from "@chakra-ui/icons";
