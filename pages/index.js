@@ -23,10 +23,16 @@ export const getServerSideProps = async ({ req }) => {
 			},
 		};
 	}
+	
+	let snippets = []
 
-	const snippets = await fetchAllSnippets();
+	try {
+		snippets = await fetchAllSnippets();
+	} catch(e) {
+		console.log({ e })
+	}
 	return {
-		props: { snippets: snippets ? snippets : [] },
+		props: { snippets },
 	};
 };
 
