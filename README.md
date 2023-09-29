@@ -2,18 +2,19 @@
 
 # Snippets
 
-What is Snippets?
----------------------
-* Platform aimed at helping developers speed up their workflow through code snippets
+## What is Snippets?
 
-Introduction
----------------------
-I created a platform aimed at helping developers, particularly new and incoming developers, speed up their workflow by allowing them to search for reusable code blocks that can easily be copied and added to their existing codebase. 
-It would also act as a second brain for developers to dump all the code that they frequently reuse for future reference. 
+- Platform aimed at helping developers speed up their workflow through code snippets
+
+## Introduction
+
+I created a platform aimed at helping developers, particularly new and incoming developers, speed up their workflow by allowing them to search for reusable code blocks that can easily be copied and added to their existing codebase.
+It would also act as a second brain for developers to dump all the code that they frequently reuse for future reference.
 
 One of the best ways to improve your skills is to gain the habit of reading through other peoples code while writing code that others can learn new coding techniques and styles from.
 
 ### Key Features
+
 - Authentication
   - Login
   - Sign Up
@@ -60,13 +61,13 @@ VERCEL_URL=
 Install deps:
 
 ```bash
-npm install
+pnpm install
 ```
 
 Run Next dev server:
 
 ```bash
-npm run dev
+pnpm run dev
 ```
 
 ## Contributing

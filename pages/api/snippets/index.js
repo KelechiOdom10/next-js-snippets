@@ -8,7 +8,6 @@ const authorization = nc().post("/api/snippets", authorize);
 export default getHandler()
   .use(authorization)
   .get(async (req, res) => {
-    console.log("herreee");
     try {
       const snippets = await db.query("SELECT * FROM snippet");
       console.log({ snippets });
