@@ -32,9 +32,7 @@ export const getServerSideProps = async ({ req, res }) => {
   let snippets = [];
 
   try {
-    const hmm = await fetchAllSnippets();
-    snippets = hmm;
-    console.log({ hmm });
+    snippets = await fetchAllSnippets();
   } catch (e) {
     console.log({ e });
   }
